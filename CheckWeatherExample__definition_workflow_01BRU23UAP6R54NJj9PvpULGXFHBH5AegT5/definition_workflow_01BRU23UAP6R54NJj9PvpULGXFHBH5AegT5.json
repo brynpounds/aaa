@@ -1,0 +1,166 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01BRU23UAP6R54NJj9PvpULGXFHBH5AegT5",
+    "name": "Check Weather",
+    "title": "Check Weather",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Weather",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BRU2SX7RXFX7RZgukvSvL8k03aOW6L6Wv",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "zip",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BRU2GI19B0I0xUgrAr9GRs3SeMwoP4isZ",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "City",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01BRU2O9JW1312QPRe2ZKyQ8K0jQg85IbAL",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Check Weather",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "target_id": "definition_target_01BRU1UZY5WWZ1ALV9ebsU89orDfcx2hzbu",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01BRU34V2WMMS4kV7fpK4dCVDw9OX6zM2cC",
+        "name": "HTTP Request",
+        "title": "HTTP Request",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "display_name": "HTTP Request",
+          "method": "GET",
+          "relative_url": "/data/2.5/weather?zip=$workflow.definition_workflow_01BRU23UAP6R54NJj9PvpULGXFHBH5AegT5.input.variable_workflow_01BRU2GI19B0I0xUgrAr9GRs3SeMwoP4isZ$,us\u0026appid=11a1aac6bc7d01ea13f0d2a8e78c227e",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BRU40PD1A9F5oiGhbq8cAne6tcciaelMq",
+        "name": "JSONPath Query",
+        "title": "JSONPath Query",
+        "type": "corejava.jsonpathquery",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "JSONPath Query",
+          "input_json": "$activity.definition_activity_01BRU34V2WMMS4kV7fpK4dCVDw9OX6zM2cC.output.response_body$",
+          "jsonpath_queries": [
+            {
+              "jsonpath_query": "$[\"name\"]",
+              "jsonpath_query_name": "tempcityvar",
+              "jsonpath_query_type": "string"
+            },
+            {
+              "jsonpath_query": "$[\"weather\"][0][\"description\"]",
+              "jsonpath_query_name": "tempvarweather",
+              "jsonpath_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01BRU4Y38SRM546SWLCBL5vK8nXBBYUnUJa",
+        "name": "Set Variables",
+        "title": "Set Variables",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set Variables",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01BRU23UAP6R54NJj9PvpULGXFHBH5AegT5.output.variable_workflow_01BRU2O9JW1312QPRe2ZKyQ8K0jQg85IbAL$",
+              "variable_value_new": "$activity.definition_activity_01BRU40PD1A9F5oiGhbq8cAne6tcciaelMq.output.jsonpath_queries.tempcityvar$"
+            },
+            {
+              "variable_to_update": "$workflow.definition_workflow_01BRU23UAP6R54NJj9PvpULGXFHBH5AegT5.output.variable_workflow_01BRU2SX7RXFX7RZgukvSvL8k03aOW6L6Wv$",
+              "variable_value_new": "$activity.definition_activity_01BRU40PD1A9F5oiGhbq8cAne6tcciaelMq.output.jsonpath_queries.tempvarweather$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01BRU1UZY5WWZ1ALV9ebsU89orDfcx2hzbu": {
+      "unique_name": "definition_target_01BRU1UZY5WWZ1ALV9ebsU89orDfcx2hzbu",
+      "name": "OpenWeather",
+      "title": "OpenWeather",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": true,
+        "display_name": "OpenWeather",
+        "host": "192.241.187.136",
+        "no_runtime_user": true,
+        "port": 443,
+        "protocol": "https"
+      }
+    }
+  }
+}
