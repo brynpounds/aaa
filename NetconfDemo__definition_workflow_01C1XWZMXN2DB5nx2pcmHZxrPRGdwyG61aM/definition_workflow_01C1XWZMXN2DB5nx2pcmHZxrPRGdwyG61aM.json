@@ -1,0 +1,194 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01C1XWZMXN2DB5nx2pcmHZxrPRGdwyG61aM",
+    "name": "Netconf Demo",
+    "title": "Netconf Demo",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": null,
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Netconf Demo",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "netconf.endpoint",
+        "target_id": "definition_target_01C1XWU670LVN2jGEyVjsTc2dKMwseaHoEq",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01C1Y4E62777S6lylmdZIkEzVOBld02kykX",
+        "name": "\u003cget\u003e / \u003cget-config\u003e",
+        "title": "Raw Get",
+        "type": "netconf.get",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Raw Get",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "source": "running",
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01C1YA058Q6VR6uFYs4IoyKbC0mDv7HWfmK",
+        "name": "\u003cget\u003e / \u003cget-config\u003e",
+        "title": "Get Hostname",
+        "type": "netconf.get",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Get Hostname",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "source": "running",
+          "subtree": "interface",
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          },
+          "xpath": "/native/hostname"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01C1YCZ0E6YLE2nwAEIevrouuROZ61dkVvV",
+        "name": "\u003cget\u003e / \u003cget-config\u003e",
+        "title": "Filter test",
+        "type": "netconf.get",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Filter test",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "source": "running",
+          "subtree": "\u003cif:interfaces xmlns:l2vpn-pw=\"urn:cisco:params:xml:ns:yang:pw\"\n                   xmlns:ospf=\"urn:ietf:params:xml:ns:yang:ietf-ospf\"\n                   xmlns:ip=\"urn:ietf:params:xml:ns:yang:ietf-ip\"\n                   xmlns:v6ur=\"urn:ietf:params:xml:ns:yang:ietf-ipv6-unicast-routing\"\n                   xmlns:eth=\"urn:cisco:params:xml:ns:yang:cisco-ethernet\"\n                   xmlns:if-ext=\"urn:ietf:params:xml:ns:yang:ietf-interfaces-ext\"\n                   xmlns:cisco-ospf=\"urn:ietf:params:xml:ns:yang:cisco-ospf\"\n                   xmlns:cisco-acl=\"urn:ietf:params:xml:ns:yang:cisco-acl\"\n                   xmlns:rt=\"urn:ietf:params:xml:ns:yang:ietf-routing\"\n                   xmlns:cisco-policy-target=\"urn:ietf:params:xml:ns:yang:cisco-policy-target\"\n                   xmlns:target=\"urn:ietf:params:xml:ns:yang:ietf-diffserv-target\"\n                   xmlns:if=\"urn:ietf:params:xml:ns:yang:ietf-interfaces\"\n                   xmlns:v4ur=\"urn:ietf:params:xml:ns:yang:ietf-ipv4-unicast-routing\"/\u003e",
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01C1Z2G7U2YPZ463r0i7EduPti2XR3sopSD",
+        "name": "\u003cget\u003e / \u003cget-config\u003e",
+        "title": "Interface test",
+        "type": "netconf.get",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Interface test",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "source": "running",
+          "subtree": "\u003cif:interfaces xmlns:l2vpn-pw=\"urn:cisco:params:xml:ns:yang:pw\"\n                   xmlns:ospf=\"urn:ietf:params:xml:ns:yang:ietf-ospf\"\n                   xmlns:ip=\"urn:ietf:params:xml:ns:yang:ietf-ip\"\n                   xmlns:v6ur=\"urn:ietf:params:xml:ns:yang:ietf-ipv6-unicast-routing\"\n                   xmlns:eth=\"urn:cisco:params:xml:ns:yang:cisco-ethernet\"\n                   xmlns:if-ext=\"urn:ietf:params:xml:ns:yang:ietf-interfaces-ext\"\n                   xmlns:cisco-ospf=\"urn:ietf:params:xml:ns:yang:cisco-ospf\"\n                   xmlns:cisco-acl=\"urn:ietf:params:xml:ns:yang:cisco-acl\"\n                   xmlns:rt=\"urn:ietf:params:xml:ns:yang:ietf-routing\"\n                   xmlns:cisco-policy-target=\"urn:ietf:params:xml:ns:yang:cisco-policy-target\"\n                   xmlns:target=\"urn:ietf:params:xml:ns:yang:ietf-diffserv-target\"\n                   xmlns:if=\"http://openconfig.net/yang/interfaces\"\n                   xmlns:v4ur=\"urn:ietf:params:xml:ns:yang:ietf-ipv4-unicast-routing\"/\u003e",
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          },
+          "xpath": "/interfaces/interface[name='GigabitEthernet1']/description"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01C1ZODZGGQIU0MqKlVNnORpDVyUOT9iEbp",
+        "name": "\u003cedit-config\u003e",
+        "title": "SET Hostname Test",
+        "type": "netconf.editConfig",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "config": "\u003cnative xmlns=\"http://cisco.com/ns/yang/Cisco-IOS-XE-native\"\u003e\u003chostname\u003eNETCONF-WAS-HERE\u003c/hostname\u003e\u003c/native\u003e",
+          "continue_on_failure": false,
+          "datastore": "running",
+          "defaultoperation": "merge",
+          "display_name": "SET Hostname Test",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "use_workflow_target": true
+          },
+          "testoption": "test-then-set"
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01C1XWU670LVN2jGEyVjsTc2dKMwseaHoEq": {
+      "unique_name": "definition_target_01C1XWU670LVN2jGEyVjsTc2dKMwseaHoEq",
+      "name": "CSR1",
+      "title": "CSR1",
+      "type": "netconf.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01C1XWSN1WAQP6kJn4jMDJrgKmRB4VL26RW",
+        "display_name": "CSR1",
+        "host": "10.18.181.43",
+        "port": 830
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01C1XWSN1WAQP6kJn4jMDJrgKmRB4VL26RW": {
+      "unique_name": "definition_runtime_user_01C1XWSN1WAQP6kJn4jMDJrgKmRB4VL26RW",
+      "name": "default",
+      "title": "default",
+      "type": "runtime_user.netconf_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "default",
+        "password": "*****",
+        "username": "*****"
+      }
+    }
+  }
+}
