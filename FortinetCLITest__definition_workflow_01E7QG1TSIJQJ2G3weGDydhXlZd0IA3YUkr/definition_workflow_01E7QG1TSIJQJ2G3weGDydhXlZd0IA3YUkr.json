@@ -1,0 +1,220 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01E7QG1TSIJQJ2G3weGDydhXlZd0IA3YUkr",
+    "name": "fortinet upgrade test",
+    "title": "fortinet upgrade test",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Fortinet CLI command Output",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01E7R9LM0BQRH6ffQbdCKBw9n6W2rAZldnr",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "fortinet upgrade test",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "json-rpc.endpoint",
+        "target_id": "definition_target_01E1RREK4JJHN7OrsViU8ScRJnWg3B2k6OD",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01E7QGCC7T4CO3pB5oHXLlHtfx1MMrnCsKi",
+        "name": "Session Login",
+        "title": "Session Login",
+        "type": "jsonrpc.login",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Session Login",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01E7QGO0J9KSI5UVyI9XTL63XgssHfFpHBU",
+        "name": "Start a new Transaction",
+        "title": "Start a new Transaction",
+        "type": "jsonrpc.newtrans",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "database": "running",
+          "display_name": "Start a new Transaction",
+          "mode": "read_write",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "sessionid": "$activity.definition_activity_01E7QGCC7T4CO3pB5oHXLlHtfx1MMrnCsKi.output.sessionid$",
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01E7QGW4KPYMP3Y0AYv4qmKQuMdTaKWdEkj",
+        "name": "Run Action",
+        "title": "Run Action",
+        "type": "jsonrpc.runaction",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Run Action",
+          "params": "{\"args\":\"\\\"get system settings\\\"\"}",
+          "path": "/ncs:devices/device{CPE-a4a725b1-8f7d-4930-a3ba-0e610033ed6a}/config/fortinet-fortios-non-vdom:exec/any/",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "sessionid": "$activity.definition_activity_01E7QGCC7T4CO3pB5oHXLlHtfx1MMrnCsKi.output.sessionid$",
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          },
+          "th": "$activity.definition_activity_01E7QGO0J9KSI5UVyI9XTL63XgssHfFpHBU.output.th$"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01E7QK4EFC30Q2naq569aQqalEzuBUqOlt7",
+        "name": "JSONPath Query",
+        "title": "JSONPath Query",
+        "type": "corejava.jsonpathquery",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "JSONPath Query",
+          "input_json": "$activity.definition_activity_01E7QGW4KPYMP3Y0AYv4qmKQuMdTaKWdEkj.output.output$",
+          "jsonpath_queries": [
+            {
+              "jsonpath_query": "$.[\"result\"][0][\"value\"]",
+              "jsonpath_query_name": "FortinetFullConfiguration",
+              "jsonpath_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01E7QZFYSBJVV0zyNIW1VBGlD36fDt7HMGx",
+        "name": "Execute Python Script",
+        "title": "Execute Python Script",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Execute Python Script",
+          "script": "x=\"\"\"$activity.definition_activity_01E7QK4EFC30Q2naq569aQqalEzuBUqOlt7.output.jsonpath_queries.FortinetFullConfiguration$\"\"\".replace('\\n', '\u003cbr /\u003e')",
+          "script_queries": [
+            {
+              "script_query": "x",
+              "script_query_name": "quicktest",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01E7QU1JO1CIK3auKKzjGkXbLg6Otvvu1pO",
+        "name": "Set Variables",
+        "title": "Set Variables",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set Variables",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01E7QG1TSIJQJ2G3weGDydhXlZd0IA3YUkr.output.variable_workflow_01E7R9LM0BQRH6ffQbdCKBw9n6W2rAZldnr$",
+              "variable_value_new": "$activity.definition_activity_01E7QZFYSBJVV0zyNIW1VBGlD36fDt7HMGx.output.script_queries.quicktest$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01E1RREK4JJHN7OrsViU8ScRJnWg3B2k6OD": {
+      "unique_name": "definition_target_01E1RREK4JJHN7OrsViU8ScRJnWg3B2k6OD",
+      "name": "BRYN-MSX-135-JSON-RPC",
+      "title": "BRYN-MSX-135-JSON-RPC",
+      "type": "json-rpc.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01E1RQNHFWEED13sni7ob1DwaxrHibRm7eX",
+        "display_name": "BRYN-MSX-135-JSON-RPC",
+        "host": "nso-manageddevice.vms.svc.cluster.local",
+        "port": 8080,
+        "protocol": "http"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01E1RQNHFWEED13sni7ob1DwaxrHibRm7eX": {
+      "unique_name": "definition_runtime_user_01E1RQNHFWEED13sni7ob1DwaxrHibRm7eX",
+      "name": "bryn-msx-135-JSON-RPC",
+      "title": "bryn-msx-135-JSON-RPC",
+      "type": "runtime_user.json-rpc_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "bryn-msx-135-JSON-RPC",
+        "password": "*****",
+        "user": "*****"
+      }
+    }
+  }
+}
