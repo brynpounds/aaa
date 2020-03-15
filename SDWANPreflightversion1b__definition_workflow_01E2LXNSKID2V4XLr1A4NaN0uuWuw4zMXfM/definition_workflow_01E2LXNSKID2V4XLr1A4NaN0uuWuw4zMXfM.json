@@ -10,6 +10,18 @@
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
+          "scope": "input",
+          "name": "Device Display Name",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01E2P34ZRSSNP1I07VJsofHgPMdmfAiAldx",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
           "scope": "output",
           "name": "Bootflash Report",
           "type": "datatype.string",
@@ -88,18 +100,6 @@
           "is_required": false
         },
         "unique_name": "variable_workflow_01E2P2O5WH4J15vCcfS6LRje1FwgEsbYCIg",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "Device Display Name",
-          "type": "datatype.string",
-          "is_required": false
-        },
-        "unique_name": "variable_workflow_01E2P34ZRSSNP1I07VJsofHgPMdmfAiAldx",
         "object_type": "variable_workflow"
       }
     ],
@@ -1060,7 +1060,7 @@
           "action_timeout": 180,
           "continue_on_failure": false,
           "display_name": "Python Script to check requirements",
-          "script": "if float(\"$activity.definition_activity_01E2N5Y4HEUPP2yBj5o0OPOPylXmzqvG1S5.output.script_queries.RomMonVersion$\".split(\"(\")[0].split(\".\")[1]) \u003c 9.0:\n    rommon_recomendation = \"Rommon needs an upgrade\"\nelse:\n    rommon_recomendation = \"Rommon is current enough for SD-WAN Upgrade\"\nif $activity.definition_activity_01E2NIB6I029O6r7oBIfxZnO5ubz4fedTU0.output.script_queries.freeBootflash$ \u003c 1500000000:\n    bootflash_recomendation = \"Not enough space on bootflash\"\nelse:\n    bootflash_recomendation = \"bootflash has enough space for SD-WAN upgrade\"\nreport = \"\"\"SDWAN Check for Tenant: $workflow.definition_workflow_01E2LXNSKID2V4XLr1A4NaN0uuWuw4zMXfM.static.variable_workflow_01E2M2K53KOLA38ROZKV0NeS3Sxg307gF8q$ Device: $workflow.definition_workflow_01E2LXNSKID2V4XLr1A4NaN0uuWuw4zMXfM.static.variable_workflow_01E2M30G80T3A35uIFiKlV25OeZ97bAzjIZ$...\\r\\n\\nRomMon: \"\"\" + rommon_recomendation + \"\"\"\\nBootflash: \"\"\" + bootflash_recomendation\nreport += \"\\r\\n\\nPID: $activity.definition_activity_01E2NY27VC6XT1Nkr3y6B3THpLsbMezalGo.output.script_queries.PID$\"\nreport += \"\\r\\nSN: $activity.definition_activity_01E2NY27VC6XT1Nkr3y6B3THpLsbMezalGo.output.script_queries.SN$\"\nreport += \"\\r\\nRomMon: $activity.definition_activity_01E2N5Y4HEUPP2yBj5o0OPOPylXmzqvG1S5.output.script_queries.RomMonVersion$\"\nreport += \"\\r\\nBootflash Total: $activity.definition_activity_01E2NIB6I029O6r7oBIfxZnO5ubz4fedTU0.output.script_queries.totalBootflash$\"\nreport += \"\\r\\nBootflash Free: $activity.definition_activity_01E2NIB6I029O6r7oBIfxZnO5ubz4fedTU0.output.script_queries.freeBootflash$\"\nreport += \"\\r\\nPhysical Memory: $activity.definition_activity_01E2NNDU8BM8Z280ojpzkmyBSfkWX47nUDm.output.script_queries.freeBootflash$\"\n\n",
+          "script": "if float(\"$activity.definition_activity_01E2N5Y4HEUPP2yBj5o0OPOPylXmzqvG1S5.output.script_queries.RomMonVersion$\".split(\"(\")[0].split(\".\")[1]) \u003c 9.0:\n    rommon_recomendation = \"Rommon needs an upgrade\"\nelse:\n    rommon_recomendation = \"Rommon is current enough for SD-WAN Upgrade\"\nif $activity.definition_activity_01E2NIB6I029O6r7oBIfxZnO5ubz4fedTU0.output.script_queries.freeBootflash$ \u003c 1500000000:\n    bootflash_recomendation = \"Not enough space on bootflash\"\nelse:\n    bootflash_recomendation = \"bootflash has enough space for SD-WAN upgrade\"\nreport = \"\"\"SDWAN Check for Tenant: $workflow.definition_workflow_01E2LXNSKID2V4XLr1A4NaN0uuWuw4zMXfM.static.variable_workflow_01E2M2K53KOLA38ROZKV0NeS3Sxg307gF8q$ Device: $workflow.definition_workflow_01E2LXNSKID2V4XLr1A4NaN0uuWuw4zMXfM.static.variable_workflow_01E2M30G80T3A35uIFiKlV25OeZ97bAzjIZ$... \"\"\" + \"\u003cbr /\u003e\" + \"\u003cbr /\u003e\" + \"\"\"RomMon: \"\"\"+ rommon_recomendation + \"\u003cbr /\u003e\" + \"\"\"\\nBootflash: \"\"\" + bootflash_recomendation + \"\u003cbr /\u003e\"\nreport += \"\\r\\n\\nPID: $activity.definition_activity_01E2NY27VC6XT1Nkr3y6B3THpLsbMezalGo.output.script_queries.PID$\" + \"\u003cbr /\u003e\"\nreport += \"\\r\\nSN: $activity.definition_activity_01E2NY27VC6XT1Nkr3y6B3THpLsbMezalGo.output.script_queries.SN$\" + \"\u003cbr /\u003e\"\nreport += \"\\r\\nRomMon: $activity.definition_activity_01E2N5Y4HEUPP2yBj5o0OPOPylXmzqvG1S5.output.script_queries.RomMonVersion$\" + \"\u003cbr /\u003e\"\nreport += \"\\r\\nBootflash Total: $activity.definition_activity_01E2NIB6I029O6r7oBIfxZnO5ubz4fedTU0.output.script_queries.totalBootflash$\" + \"\u003cbr /\u003e\"\nreport += \"\\r\\nBootflash Free: $activity.definition_activity_01E2NIB6I029O6r7oBIfxZnO5ubz4fedTU0.output.script_queries.freeBootflash$\" + \"\u003cbr /\u003e\"\nreport += \"\\r\\nPhysical Memory: $activity.definition_activity_01E2NNDU8BM8Z280ojpzkmyBSfkWX47nUDm.output.script_queries.freeBootflash$\" + \"\u003cbr /\u003e\"\n\n",
           "script_queries": [
             {
               "script_query": "rommon_recomendation",
