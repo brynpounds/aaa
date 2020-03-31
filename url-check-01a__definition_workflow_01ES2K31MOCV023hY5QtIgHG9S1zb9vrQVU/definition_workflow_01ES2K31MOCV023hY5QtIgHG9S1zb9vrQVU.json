@@ -1,0 +1,189 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01ES2K31MOCV023hY5QtIgHG9S1zb9vrQVU",
+    "name": "urllib example",
+    "title": "urllib example",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "ServiceIsReady",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01ES4UTW7E7X13jqUZYLJnalsZG5qAF2RDy",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.integer",
+        "properties": {
+          "value": 0,
+          "scope": "local",
+          "name": "Counter",
+          "type": "datatype.integer",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01ES5138Y2MIS71AbfziU32atWApXQmXu1h",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "urllib example",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01ES4UXPG5X9Y4a9x1ikknzRPhhtnQ5jv6D",
+        "name": "Set Variables",
+        "title": "Set Variables",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set Variables",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01ES2K31MOCV023hY5QtIgHG9S1zb9vrQVU.local.variable_workflow_01ES4UTW7E7X13jqUZYLJnalsZG5qAF2RDy$",
+              "variable_value_new": "false"
+            },
+            {
+              "variable_to_update": "$workflow.definition_workflow_01ES2K31MOCV023hY5QtIgHG9S1zb9vrQVU.local.variable_workflow_01ES5138Y2MIS71AbfziU32atWApXQmXu1h$",
+              "variable_value_new": 0
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01ES4UA7WFSP30Y3Nw5OffXE235Oa7fGxs7",
+        "name": "While Loop",
+        "title": "While Loop",
+        "type": "logic.while",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "While Loop",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01ES4UAADJ1GY64dHyVCwvyBKQSmkKdvQTk",
+            "name": "Condition Branch",
+            "title": "Condition Branch",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": {
+                  "left_operand": "$workflow.definition_workflow_01ES2K31MOCV023hY5QtIgHG9S1zb9vrQVU.local.variable_workflow_01ES4UTW7E7X13jqUZYLJnalsZG5qAF2RDy$",
+                  "operator": "eq",
+                  "right_operand": "false"
+                },
+                "operator": "and",
+                "right_operand": {
+                  "left_operand": "$workflow.definition_workflow_01ES2K31MOCV023hY5QtIgHG9S1zb9vrQVU.local.variable_workflow_01ES5138Y2MIS71AbfziU32atWApXQmXu1h$",
+                  "operator": "lt",
+                  "right_operand": 10
+                }
+              },
+              "continue_on_failure": false,
+              "display_name": "Condition Branch",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01ES2K96DT7QW3uClxlhBL00haFi3SUcoAx",
+                "name": "Execute Python Script",
+                "title": "Execute Python Script",
+                "type": "python3.script",
+                "base_type": "activity",
+                "properties": {
+                  "action_timeout": 180,
+                  "continue_on_failure": false,
+                  "display_name": "Execute Python Script",
+                  "script": "y=\"\"\nz=$workflow.definition_workflow_01ES2K31MOCV023hY5QtIgHG9S1zb9vrQVU.local.variable_workflow_01ES5138Y2MIS71AbfziU32atWApXQmXu1h$\nimport urllib.request\nimport socket\ntimeout = 5\nsocket.setdefaulttimeout(timeout)\n\ntry:\n    z += 1\n    with urllib.request.urlopen('http://10.18.180.141/') as response:\n        html = response.read()\n    x=str(html)\n    if \"snausagess\" in x:\n        y=\"True\"\n    else:\n        y = \"false\"\nexcept:\n    y=\"ERROR!!!\"\n    z+=1",
+                  "script_queries": [
+                    {
+                      "script_query": "y",
+                      "script_query_name": "Out",
+                      "script_query_type": "string"
+                    },
+                    {
+                      "script_query": "z",
+                      "script_query_name": "NewCount",
+                      "script_query_type": "integer"
+                    }
+                  ],
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01ES4WA405NOY0jVgmJWxIdrhLvi4RCEKb1",
+                "name": "Set Variables",
+                "title": "Set Variables",
+                "type": "core.set_multiple_variables",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Set Variables",
+                  "skip_execution": false,
+                  "variables_to_update": [
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01ES2K31MOCV023hY5QtIgHG9S1zb9vrQVU.local.variable_workflow_01ES4UTW7E7X13jqUZYLJnalsZG5qAF2RDy$",
+                      "variable_value_new": "$activity.definition_activity_01ES2K96DT7QW3uClxlhBL00haFi3SUcoAx.output.script_queries.Out$"
+                    },
+                    {
+                      "variable_to_update": "$workflow.definition_workflow_01ES2K31MOCV023hY5QtIgHG9S1zb9vrQVU.local.variable_workflow_01ES5138Y2MIS71AbfziU32atWApXQmXu1h$",
+                      "variable_value_new": "$activity.definition_activity_01ES2K96DT7QW3uClxlhBL00haFi3SUcoAx.output.script_queries.NewCount$"
+                    }
+                  ]
+                },
+                "object_type": "definition_activity"
+              },
+              {
+                "unique_name": "definition_activity_01ES4WLACDB1G7HNlNVjbrwgPRODMKU5S2o",
+                "name": "Sleep",
+                "title": "Sleep",
+                "type": "core.sleep",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Sleep",
+                  "skip_execution": false,
+                  "sleep_interval": 5
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  }
+}
