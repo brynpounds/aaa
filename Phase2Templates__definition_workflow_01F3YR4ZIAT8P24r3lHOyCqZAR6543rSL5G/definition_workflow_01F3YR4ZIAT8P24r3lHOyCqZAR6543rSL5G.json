@@ -1,0 +1,226 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01F3YR4ZIAT8P24r3lHOyCqZAR6543rSL5G",
+    "name": "Phase2Templates",
+    "title": "Phase2Templates",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "SiteId",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01F3YR5BBH97J1yIdSt7EAlP4j2D2YsZBeT",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Phase2Templates",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "msx-api.endpoint",
+        "target_id": "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01F3YR5JR93NT7Zjm6QbwQUHsXBRfuxi650",
+        "name": "Session Login",
+        "title": "Session Login",
+        "type": "msxapi.login",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Session Login",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "specificPassword": "superuser",
+          "specificUsername": "superuser",
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01F3YR5REC6CX3hBeMgdx0ijTeQoDEkd5z6",
+        "name": "JSONPath Query",
+        "title": "Get Usable Token",
+        "type": "corejava.jsonpathquery",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Get Usable Token",
+          "input_json": "$activity.definition_activity_01F3YR5JR93NT7Zjm6QbwQUHsXBRfuxi650.output.body$",
+          "jsonpath_queries": [
+            {
+              "jsonpath_query": "$.[\"access_token\"]",
+              "jsonpath_query_name": "MSXToken",
+              "jsonpath_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01F3YR60LA14211jvmXlc6m3QrjMWaL4BcU",
+        "name": "MSX-API Request",
+        "title": "Apply Template:Phase20",
+        "type": "msxapi.request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "body": "[{\"siteId\":\"$workflow.definition_workflow_01F3YR4ZIAT8P24r3lHOyCqZAR6543rSL5G.input.variable_workflow_01F3YR5BBH97J1yIdSt7EAlP4j2D2YsZBeT$\",\"templateDetails\":[{\"templateId\":\"a30bf7ce-2caf-42d9-973b-45a20a4f6a49\",\"templateName\":\"template2b\",\"deviceParams\":[{\"name\":\"TYPE_ENABLE\",\"hintText\":\"ENABLE\",\"label\":\"TYPE_ENABLE\",\"type\":\"String\",\"displayType\":\"Input\",\"allowedValues\":\"\",\"value\":\"ENABLE\",\"toolTipText\":\"\"}]}]}]",
+          "continueOnError": false,
+          "continue_on_failure": false,
+          "display_name": "Apply Template:Phase20",
+          "expectEnvelope": false,
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer $activity.definition_activity_01F3YR5REC6CX3hBeMgdx0ijTeQoDEkd5z6.output.jsonpath_queries.MSXToken$"
+            }
+          ],
+          "method": "POST",
+          "msxtoken": "$activity.definition_activity_01F3YR5JR93NT7Zjm6QbwQUHsXBRfuxi650.output.accessToken$",
+          "path": "/manageddevice/api/v1/templateinstances",
+          "queryParameters": [
+            {
+              "key": "Accept",
+              "value": "application/json"
+            }
+          ],
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01F3YR67LOF121UeeeilWMnpbDKWzTbUjo3",
+        "name": "Sleep",
+        "title": "Sleep",
+        "type": "core.sleep",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Sleep",
+          "skip_execution": false,
+          "sleep_interval": 30
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01F3YR6E7DOM07gQ7EWgA4sxF7lpFmi2XVl",
+        "name": "MSX-API Request",
+        "title": "Apply Template:Phase21",
+        "type": "msxapi.request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "body": "[{\"siteId\":\"$workflow.definition_workflow_01F3YR4ZIAT8P24r3lHOyCqZAR6543rSL5G.input.variable_workflow_01F3YR5BBH97J1yIdSt7EAlP4j2D2YsZBeT$\",\"templateDetails\":[{\"templateId\":\"e2519cad-5090-44f8-87cb-855d1bdd2762\",\"templateName\":\"add_remote_user\",\"deviceParams\":[{\"name\":\"USER_NAME\",\"hintText\":\"rauser1\",\"label\":\"USER_NAME\",\"type\":\"String\",\"displayType\":\"Input\",\"allowedValues\":\"\",\"value\":\"rauser1\",\"toolTipText\":\"\"}]}]}]",
+          "continueOnError": false,
+          "continue_on_failure": false,
+          "display_name": "Apply Template:Phase21",
+          "expectEnvelope": false,
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer $activity.definition_activity_01F3YR5REC6CX3hBeMgdx0ijTeQoDEkd5z6.output.jsonpath_queries.MSXToken$"
+            }
+          ],
+          "method": "POST",
+          "msxtoken": "$activity.definition_activity_01F3YR5JR93NT7Zjm6QbwQUHsXBRfuxi650.output.accessToken$",
+          "path": "/manageddevice/api/v1/templateinstances",
+          "queryParameters": [
+            {
+              "key": "Accept",
+              "value": "application/json"
+            }
+          ],
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7": {
+      "unique_name": "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7",
+      "name": "MSX API",
+      "description": "MSX API",
+      "type": "msx-api.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "clientId": "nfv-service",
+        "clientSecret": "*****",
+        "default_runtime_user_id": "definition_runtime_user_01AP3ABOXO4GP34LXxefnUlt5r8mJbCHCgt",
+        "display_name": "MSX API",
+        "host": "198.18.134.2",
+        "port": 8765,
+        "protocol": "http"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01AP3ABOXO4GP34LXxefnUlt5r8mJbCHCgt": {
+      "unique_name": "definition_runtime_user_01AP3ABOXO4GP34LXxefnUlt5r8mJbCHCgt",
+      "name": "MSX System",
+      "description": "MSX System",
+      "type": "runtime_user.msx-api_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "MSX System",
+        "password": "*****",
+        "username": "*****"
+      }
+    }
+  }
+}
