@@ -1,0 +1,285 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01F3BA9VME7AU3Eri4AeD6IX0GZTd4kMZX7",
+    "name": "STEP2: Execute ASAv_active_commands_1",
+    "title": "STEP2: Execute ASAv_active_commands_1",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "NSO Device Name",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01F3GLFOODKVJ5Lvacoh6FmyMyasc0PAgmw",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "STEP2: Execute ASAv_active_commands_1",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "msx-api.endpoint",
+        "target_id": "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01F3BAK9U03DK7AJMkTU42XejOxwNj5b00y",
+        "name": "Session Login",
+        "title": "Log into MSX",
+        "type": "msxapi.login",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Log into MSX",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "specificPassword": "superuser",
+          "specificUsername": "superuser",
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01F3DJS32LTUF36gblg9eF2fMNUfRqbJjJx",
+        "name": "Session Login",
+        "title": "Login to NSO",
+        "type": "jsonrpc.login",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Login to NSO",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01F3DLBD6LQ5P6syqb1vwIWGB3LSOBi9v9U"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01F3DMQR0P3GP7MDzhmnFjM1T2IEcNVFznP",
+        "name": "Start a new Transaction",
+        "title": "Start a new Transaction",
+        "type": "jsonrpc.newtrans",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "database": "running",
+          "display_name": "Start a new Transaction",
+          "mode": "read_write",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "sessionid": "$activity.definition_activity_01F3DJS32LTUF36gblg9eF2fMNUfRqbJjJx.output.sessionid$",
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01F3DLBD6LQ5P6syqb1vwIWGB3LSOBi9v9U"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01F3DUP13DSSY5IhLfQ0pDly5XhpVtF26lS",
+        "name": "Run Action",
+        "title": "Download Windows anyconnect client",
+        "type": "jsonrpc.runaction",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Download Windows anyconnect client",
+          "params": "{\"args\":\"\\\"copy /noconfirm http://54.237.190.169/anyconnect-win-4.8.03036-webdeploy-k9.pkg flash:\\\"\\\"|noprompts\\\"\"}",
+          "path": "/ncs:devices/device{$workflow.definition_workflow_01F3BA9VME7AU3Eri4AeD6IX0GZTd4kMZX7.input.variable_workflow_01F3GLFOODKVJ5Lvacoh6FmyMyasc0PAgmw$}/live-status/asa-stats:exec/any/",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "sessionid": "$activity.definition_activity_01F3DJS32LTUF36gblg9eF2fMNUfRqbJjJx.output.sessionid$",
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01F3DLBD6LQ5P6syqb1vwIWGB3LSOBi9v9U"
+          },
+          "th": "$activity.definition_activity_01F3DMQR0P3GP7MDzhmnFjM1T2IEcNVFznP.output.th$"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01F3FWNSKVTF24EJ78RWHNLKOhv7zGvlPTl",
+        "name": "Run Action",
+        "title": "Download Mac anyconnect client",
+        "type": "jsonrpc.runaction",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Download Mac anyconnect client",
+          "params": "{\"args\":\"\\\"copy /noconfirm http://54.237.190.169/anyconnect-macos-4.8.03036-webdeploy-k9.pkg flash:\\\"\\\"|noprompts\\\"\"}",
+          "path": "/ncs:devices/device{$workflow.definition_workflow_01F3BA9VME7AU3Eri4AeD6IX0GZTd4kMZX7.input.variable_workflow_01F3GLFOODKVJ5Lvacoh6FmyMyasc0PAgmw$}/live-status/asa-stats:exec/any/",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "sessionid": "$activity.definition_activity_01F3DJS32LTUF36gblg9eF2fMNUfRqbJjJx.output.sessionid$",
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01F3DLBD6LQ5P6syqb1vwIWGB3LSOBi9v9U"
+          },
+          "th": "$activity.definition_activity_01F3DMQR0P3GP7MDzhmnFjM1T2IEcNVFznP.output.th$"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01F3FWP9TTCXL79oDOJumBJLbwvfqPmvU3m",
+        "name": "Run Action",
+        "title": "Download JP's XML file",
+        "type": "jsonrpc.runaction",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Download JP's XML file",
+          "params": "{\"args\":\"\\\"copy /noconfirm http://54.237.190.169/RAVPN_client_profile.xml flash:\\\"\\\"|noprompts\\\"\"}",
+          "path": "/ncs:devices/device{$workflow.definition_workflow_01F3BA9VME7AU3Eri4AeD6IX0GZTd4kMZX7.input.variable_workflow_01F3GLFOODKVJ5Lvacoh6FmyMyasc0PAgmw$}/live-status/asa-stats:exec/any/",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "sessionid": "$activity.definition_activity_01F3DJS32LTUF36gblg9eF2fMNUfRqbJjJx.output.sessionid$",
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01F3DLBD6LQ5P6syqb1vwIWGB3LSOBi9v9U"
+          },
+          "th": "$activity.definition_activity_01F3DMQR0P3GP7MDzhmnFjM1T2IEcNVFznP.output.th$"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01F3KCP4TA9Y253jeRnTEJDrIUxeJY4WdXB",
+        "name": "Run Action",
+        "title": "crypto key generate rsa label ASDM_TrustPoint0  modulus 1024",
+        "type": "jsonrpc.runaction",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "crypto key generate rsa label ASDM_TrustPoint0  modulus 1024",
+          "params": "{\"args\":\"\\\"crypto key generate rsa label ASDM_TrustPoint0  modulus 1024\\\"\\\"|noprompts\\\"\"}",
+          "path": "/ncs:devices/device{$workflow.definition_workflow_01F3BA9VME7AU3Eri4AeD6IX0GZTd4kMZX7.input.variable_workflow_01F3GLFOODKVJ5Lvacoh6FmyMyasc0PAgmw$}/config/asa:EXEC/exec",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "sessionid": "$activity.definition_activity_01F3DJS32LTUF36gblg9eF2fMNUfRqbJjJx.output.sessionid$",
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01F3DLBD6LQ5P6syqb1vwIWGB3LSOBi9v9U"
+          },
+          "th": "$activity.definition_activity_01F3DMQR0P3GP7MDzhmnFjM1T2IEcNVFznP.output.th$"
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7": {
+      "unique_name": "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7",
+      "name": "MSX API",
+      "description": "MSX API",
+      "type": "msx-api.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "clientId": "nfv-service",
+        "clientSecret": "*****",
+        "default_runtime_user_id": "definition_runtime_user_01AP3ABOXO4GP34LXxefnUlt5r8mJbCHCgt",
+        "display_name": "MSX API",
+        "host": "198.18.134.2",
+        "port": 8765,
+        "protocol": "http"
+      }
+    },
+    "definition_target_01F3DLBD6LQ5P6syqb1vwIWGB3LSOBi9v9U": {
+      "unique_name": "definition_target_01F3DLBD6LQ5P6syqb1vwIWGB3LSOBi9v9U",
+      "name": "NSO-JSONRPC",
+      "title": "NSO-JSONRPC",
+      "type": "json-rpc.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01F3DKCL2YMTE7bG3AJdved5oohWatmz77M",
+        "display_name": "NSO-JSONRPC",
+        "host": "198.18.134.2",
+        "port": 8080,
+        "protocol": "http"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01AP3ABOXO4GP34LXxefnUlt5r8mJbCHCgt": {
+      "unique_name": "definition_runtime_user_01AP3ABOXO4GP34LXxefnUlt5r8mJbCHCgt",
+      "name": "MSX System",
+      "description": "MSX System",
+      "type": "runtime_user.msx-api_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "MSX System",
+        "password": "*****",
+        "username": "*****"
+      }
+    },
+    "definition_runtime_user_01F3DKCL2YMTE7bG3AJdved5oohWatmz77M": {
+      "unique_name": "definition_runtime_user_01F3DKCL2YMTE7bG3AJdved5oohWatmz77M",
+      "name": "NSO",
+      "title": "NSO",
+      "type": "runtime_user.json-rpc_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "NSO",
+        "password": "*****",
+        "user": "*****"
+      }
+    }
+  }
+}
