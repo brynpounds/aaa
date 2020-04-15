@@ -1,0 +1,337 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01F39YYO1R23Q2mNiKCGCJtdFX555Cdf9Ca",
+    "name": "STEP1: Terraform ASAaaSonAWS and add site to MD",
+    "title": "STEP1: Terraform ASAaaSonAWS and add site to MD",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "NSO Device ID",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01F51RF4IWHRP675dmWOb6pcowNoiMDvzgU",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "MSX Site ID",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01F51RLU686FP4vxAvp1wg1yDbvkdqNspUZ",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "ASAvIPAddress",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01F51R748AR612TfKs92lTHK4Gx0HePxEj9",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "STEP1: Terraform ASAaaSonAWS and add site to MD",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "msx-api.endpoint",
+        "target_id": "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01F3A9OMWJZJ23nwMy1QiJiV5neoOH5LXaN",
+        "name": "Execute Template",
+        "title": "Terraform Apply for ASAv in AWS",
+        "type": "terraform.execute_template",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Terraform Apply for ASAv in AWS",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01F3A7SXVZHS32Tlvwp7RSTsZ8AozwoOQ03"
+          },
+          "template_name": "AWSCiscoASAvTerraform",
+          "templates_path": "/root/terraform_plans/"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01F3ACL0WIUV65Je0T7WlJ45MFUb6Q0D13l",
+        "name": "Execute Python Script",
+        "title": "Return ASAv elastic IP",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Return ASAv elastic IP",
+          "script": "try:\n    x=\"\"\"$activity.definition_activity_01F3A9OMWJZJ23nwMy1QiJiV5neoOH5LXaN.output.response_body$\"\"\"\n    y=repr(x).split(\"asav_public_ip = \")[1].split(\"\\\\\")[0]\nexcept:\n    y=\"error\"",
+          "script_queries": [
+            {
+              "script_query": "y",
+              "script_query_name": "ASAvIPAddress",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01F3XMM0W2VEV0zcvRkq3j1Ok9XgMrXiAQK",
+        "name": "Sleep",
+        "title": "Sleep 600 seconds",
+        "type": "core.sleep",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Sleep 600 seconds",
+          "skip_execution": false,
+          "sleep_interval": 600
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01F3XMW1DEJT16PMYVfsU0tYJ9CH95Ld12z",
+        "name": "Session Login",
+        "title": "MSX Login",
+        "type": "msxapi.login",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "MSX Login",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "specificPassword": "superuser",
+          "specificUsername": "superuser",
+          "target": {
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01F3XOFD96NW56Hv1tWkLfc28ProKqXKuIZ",
+        "name": "JSONPath Query",
+        "title": "Get Token - better for raw MSX API calls",
+        "type": "corejava.jsonpathquery",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Get Token - better for raw MSX API calls",
+          "input_json": "$activity.definition_activity_01F3XMW1DEJT16PMYVfsU0tYJ9CH95Ld12z.output.body$",
+          "jsonpath_queries": [
+            {
+              "jsonpath_query": "$.[\"access_token\"]",
+              "jsonpath_query_name": "MSXToken",
+              "jsonpath_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01F3XPY0Y4NIP398FQy5ghvoaLg0vDqYOa4",
+        "name": "MSX-API Request",
+        "title": "Add site to Coke Managed Device",
+        "type": "msxapi.request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "body": "{\"tenantId\":\"751726fd-e801-48f9-95fe-d9f0b04d8eac\",\"tenantName\":\"751726fd-e801-48f9-95fe-d9f0b04d8eac\",\"siteName\":\"AOsite1a\",\"siteDescription\":\"AO WAS HERE\",\"siteInfo\":{\"location\":\"Seattle, WA, USA\",\"contactName\":\"Bryn Pounds\",\"contactEmail\":\"bryn@cisco.com\",\"latitude\":47.6062095,\"longitude\":-122.3320708},\"deviceModel\":\"Cisco ASA Minimal\",\"deviceInterfaces\":[],\"templateDetails\":[],\"deviceOnboardingType\":\"direct\",\"deviceIpAddress\":\"$activity.definition_activity_01F3ACL0WIUV65Je0T7WlJ45MFUb6Q0D13l.output.script_queries.ASAvIPAddress$\",\"devicePort\":\"22\",\"deviceUsername\":\"admin\",\"devicePassword\":\"Cisco123\",\"deviceSecondaryPassword\":\"Cisco123\",\"enableSecureTunnel\":\"false\",\"deviceNedId\":\"cisco-asa\",\"deviceType\":\"cli\"}",
+          "continueOnError": false,
+          "continue_on_failure": false,
+          "display_name": "Add site to Coke Managed Device",
+          "expectEnvelope": false,
+          "headers": [
+            {
+              "key": "Authorization",
+              "value": "Bearer $activity.definition_activity_01F3XOFD96NW56Hv1tWkLfc28ProKqXKuIZ.output.jsonpath_queries.MSXToken$"
+            }
+          ],
+          "method": "POST",
+          "msxtoken": "$activity.definition_activity_01F3XMW1DEJT16PMYVfsU0tYJ9CH95Ld12z.output.accessToken$",
+          "path": "/manageddevice/api/v3/sites",
+          "queryParameters": [
+            {
+              "key": "Accept",
+              "value": "application/json"
+            },
+            {
+              "key": "",
+              "value": ""
+            }
+          ],
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01F4X217FNNSQ12KvZ4MggOwzDHZ8m52kv1",
+        "name": "JSONPath Query",
+        "title": "return Device name and SiteID",
+        "type": "corejava.jsonpathquery",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "return Device name and SiteID",
+          "input_json": "$activity.definition_activity_01F3XPY0Y4NIP398FQy5ghvoaLg0vDqYOa4.output.body$",
+          "jsonpath_queries": [
+            {
+              "jsonpath_query": "$.[\"responseObject\"][\"sites\"][0][\"deviceIds\"][0]",
+              "jsonpath_query_name": "NSODeviceName",
+              "jsonpath_query_type": "string"
+            },
+            {
+              "jsonpath_query": "$.[\"responseObject\"][\"sites\"][0][\"siteId\"]",
+              "jsonpath_query_name": "MSXSiteID",
+              "jsonpath_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01F51QQJC3XAP3jJIS8ConDemakSW84K3Wm",
+        "name": "Set Variables",
+        "title": "Set Variables",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set Variables",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01F39YYO1R23Q2mNiKCGCJtdFX555Cdf9Ca.output.variable_workflow_01F51R748AR612TfKs92lTHK4Gx0HePxEj9$",
+              "variable_value_new": "$activity.definition_activity_01F3ACL0WIUV65Je0T7WlJ45MFUb6Q0D13l.output.script_queries.ASAvIPAddress$"
+            },
+            {
+              "variable_to_update": "$workflow.definition_workflow_01F39YYO1R23Q2mNiKCGCJtdFX555Cdf9Ca.output.variable_workflow_01F51RLU686FP4vxAvp1wg1yDbvkdqNspUZ$",
+              "variable_value_new": "$activity.definition_activity_01F4X217FNNSQ12KvZ4MggOwzDHZ8m52kv1.output.jsonpath_queries.MSXSiteID$"
+            },
+            {
+              "variable_to_update": "$workflow.definition_workflow_01F39YYO1R23Q2mNiKCGCJtdFX555Cdf9Ca.output.variable_workflow_01F51RF4IWHRP675dmWOb6pcowNoiMDvzgU$",
+              "variable_value_new": "$activity.definition_activity_01F4X217FNNSQ12KvZ4MggOwzDHZ8m52kv1.output.jsonpath_queries.NSODeviceName$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7": {
+      "unique_name": "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7",
+      "name": "MSX API",
+      "description": "MSX API",
+      "type": "msx-api.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "clientId": "nfv-service",
+        "clientSecret": "*****",
+        "default_runtime_user_id": "definition_runtime_user_01AP3ABOXO4GP34LXxefnUlt5r8mJbCHCgt",
+        "display_name": "MSX API",
+        "host": "198.18.134.2",
+        "port": 8765,
+        "protocol": "http"
+      }
+    },
+    "definition_target_01F3A7SXVZHS32Tlvwp7RSTsZ8AozwoOQ03": {
+      "unique_name": "definition_target_01F3A7SXVZHS32Tlvwp7RSTsZ8AozwoOQ03",
+      "name": "198.18.134.28-terraform",
+      "title": "198.18.134.28-terraform",
+      "type": "terraform.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "bash_shell": "/bin/bash",
+        "default_runtime_user_id": "definition_runtime_user_01F3A7BCVO1XS6tPZrL325ZVYpQi6Bm3JE2",
+        "display_name": "198.18.134.28-terraform",
+        "host": "198.18.134.28",
+        "port": 22
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01AP3ABOXO4GP34LXxefnUlt5r8mJbCHCgt": {
+      "unique_name": "definition_runtime_user_01AP3ABOXO4GP34LXxefnUlt5r8mJbCHCgt",
+      "name": "MSX System",
+      "description": "MSX System",
+      "type": "runtime_user.msx-api_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "MSX System",
+        "password": "*****",
+        "username": "*****"
+      }
+    },
+    "definition_runtime_user_01F3A7BCVO1XS6tPZrL325ZVYpQi6Bm3JE2": {
+      "unique_name": "definition_runtime_user_01F3A7BCVO1XS6tPZrL325ZVYpQi6Bm3JE2",
+      "name": "198.18.134.28-creds",
+      "title": "198.18.134.28-creds",
+      "type": "runtime_user.terminal_password_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "198.18.134.28-creds",
+        "password": "*****",
+        "user": "*****"
+      }
+    }
+  }
+}
