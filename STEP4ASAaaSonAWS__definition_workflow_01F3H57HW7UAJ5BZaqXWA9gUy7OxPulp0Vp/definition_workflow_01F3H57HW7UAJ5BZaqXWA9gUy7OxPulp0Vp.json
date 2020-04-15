@@ -1,0 +1,157 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01F3H57HW7UAJ5BZaqXWA9gUy7OxPulp0Vp",
+    "name": "STEP4: Execute ASAv_active_commands_2",
+    "title": "STEP4: Execute ASAv_active_commands_2",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "NSO Device Name",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01F3H8UCLR1B87DJD3COfsOPzYOtEoAFbM1",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "STEP4: Execute ASAv_active_commands_2",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "json-rpc.endpoint",
+        "target_id": "definition_target_01F3DLBD6LQ5P6syqb1vwIWGB3LSOBi9v9U",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01F3H5IRPF0K207mYUsVvxoQw6O6BHYJ2AE",
+        "name": "Session Login",
+        "title": "Session Login",
+        "type": "jsonrpc.login",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Session Login",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01F3H5TKFL6IY39qyN0D8QDE1D4bG5xoleD",
+        "name": "Start a new Transaction",
+        "title": "Start a new Transaction",
+        "type": "jsonrpc.newtrans",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "database": "running",
+          "display_name": "Start a new Transaction",
+          "mode": "read_write",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "sessionid": "$activity.definition_activity_01F3H5IRPF0K207mYUsVvxoQw6O6BHYJ2AE.output.sessionid$",
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01F3HAJPYO1HD0kNAsEaAgUGTWdKcXI5IXe",
+        "name": "Run Action",
+        "title": "crypto ca enroll ASDM_TrustPoint0 noconfirm",
+        "type": "jsonrpc.runaction",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "crypto ca enroll ASDM_TrustPoint0 noconfirm",
+          "params": "{\"args\":\"\\\"crypto ca enroll ASDM_TrustPoint0 noconfirm\\\"\\\"|noprompts\\\"\"}",
+          "path": "/ncs:devices/device/{$workflow.definition_workflow_01F3H57HW7UAJ5BZaqXWA9gUy7OxPulp0Vp.input.variable_workflow_01F3H8UCLR1B87DJD3COfsOPzYOtEoAFbM1$}/config/asa:EXEC/exec",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "sessionid": "$activity.definition_activity_01F3H5IRPF0K207mYUsVvxoQw6O6BHYJ2AE.output.sessionid$",
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "override_workflow_target_group_criteria": false,
+            "use_workflow_target": true,
+            "use_workflow_target_group": false
+          },
+          "th": "$activity.definition_activity_01F3H5TKFL6IY39qyN0D8QDE1D4bG5xoleD.output.th$"
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01F3DLBD6LQ5P6syqb1vwIWGB3LSOBi9v9U": {
+      "unique_name": "definition_target_01F3DLBD6LQ5P6syqb1vwIWGB3LSOBi9v9U",
+      "name": "NSO-JSONRPC",
+      "title": "NSO-JSONRPC",
+      "type": "json-rpc.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01F3DKCL2YMTE7bG3AJdved5oohWatmz77M",
+        "display_name": "NSO-JSONRPC",
+        "host": "198.18.134.2",
+        "port": 8080,
+        "protocol": "http"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01F3DKCL2YMTE7bG3AJdved5oohWatmz77M": {
+      "unique_name": "definition_runtime_user_01F3DKCL2YMTE7bG3AJdved5oohWatmz77M",
+      "name": "NSO",
+      "title": "NSO",
+      "type": "runtime_user.json-rpc_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "NSO",
+        "password": "*****",
+        "user": "*****"
+      }
+    }
+  }
+}
