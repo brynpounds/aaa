@@ -1,0 +1,237 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01FDD61MJRV585KDFPBo2OYId181xzFtnau",
+    "name": "Compare config",
+    "title": "Compare config",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Device Instance Id",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FDD61MDWYE44ifFMcH6rBtTiKPiaezKFn",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "output",
+          "name": "Action Failed",
+          "type": "datatype.boolean",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FDD61MDX7B23EDuU7LDfiL1vfBYTgbdbh",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Result",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01FDD61MDXAN46NIntfdJaAV5UsO92Up8Ag",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Compare config",
+      "favorite": false,
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "json-rpc.endpoint",
+        "target_id": "definition_target_01F3DLBD6LQ5P6syqb1vwIWGB3LSOBi9v9U",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01FDD6279EZ742KYHM4ew6uhpjfqGfR5tCr",
+        "name": "Session Login",
+        "title": "Session Login",
+        "type": "jsonrpc.login",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Session Login",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01FDD62EG41S95EoZkiIpGlWMEtS8gkxQQj",
+        "name": "Start a new Transaction",
+        "title": "Start a new Transaction",
+        "type": "jsonrpc.newtrans",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "database": "running",
+          "display_name": "Start a new Transaction",
+          "mode": "read_write",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "sessionid": "$activity.definition_activity_01FDD6279EZ742KYHM4ew6uhpjfqGfR5tCr.output.sessionid$",
+          "skip_execution": false,
+          "target": {
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01FDD62O4HFXG3AEKPY0ocvYgcNjcw9jhSf",
+        "name": "Run Action",
+        "title": "Compare Config",
+        "type": "jsonrpc.runaction",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Compare Config",
+          "params": "{\"outformat\":\"xml\"}",
+          "path": "/ncs:devices/device{$workflow.definition_workflow_01FDD61MJRV585KDFPBo2OYId181xzFtnau.input.variable_workflow_01FDD61MDWYE44ifFMcH6rBtTiKPiaezKFn$}/compare-config",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "sessionid": "$activity.definition_activity_01FDD6279EZ742KYHM4ew6uhpjfqGfR5tCr.output.sessionid$",
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": false,
+            "use_workflow_target": true
+          },
+          "th": "$activity.definition_activity_01FDD62EG41S95EoZkiIpGlWMEtS8gkxQQj.output.th$"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01FH28NDT0D735RasnixxvIbm8916JosdaS",
+        "name": "JSONPath Query",
+        "title": "JSONPath Query",
+        "type": "corejava.jsonpathquery",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "JSONPath Query",
+          "input_json": "$activity.definition_activity_01FDD62O4HFXG3AEKPY0ocvYgcNjcw9jhSf.output.output$",
+          "jsonpath_queries": [
+            {
+              "jsonpath_query": "$.[\"result\"][0][\"value\"]",
+              "jsonpath_query_name": "TemplateXML",
+              "jsonpath_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01FHMU2ENLK9W6GIBgVYZbXdKDTdCM0v5ns",
+        "name": "Execute Python Script",
+        "title": "Execute Python Script",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Execute Python Script",
+          "script": "zzz=\"\u003ctextarea\u003e\u003cconfig\u003e\u003c/textarea\u003e\"\nxxx=\"\"\"$activity.definition_activity_01FH28NDT0D735RasnixxvIbm8916JosdaS.output.jsonpath_queries.TemplateXML$\"\"\"\nyyy=xxx.split(\"\\n\")\nfor item in yyy:\n    zzz += \"\"\"\u003ctextarea\u003e\"\"\" + item + \"\"\"\u003c/textarea\u003e\u003cbr\u003e\"\"\"\nzzz += \"\u003ctextarea\u003e\u003c/config\u003e\u003c/textarea\u003e\"",
+          "script_queries": [
+            {
+              "script_query": "zzz",
+              "script_query_name": "FormattedOutput",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01FHMXAYTPOJN7gEUN19ac9mDb1354lF4L5",
+        "name": "Set Variables",
+        "title": "Set Variables",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set Variables",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01FDD61MJRV585KDFPBo2OYId181xzFtnau.output.variable_workflow_01FDD61MDXAN46NIntfdJaAV5UsO92Up8Ag$",
+              "variable_value_new": "$activity.definition_activity_01FHMU2ENLK9W6GIBgVYZbXdKDTdCM0v5ns.output.script_queries.FormattedOutput$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01F3DLBD6LQ5P6syqb1vwIWGB3LSOBi9v9U": {
+      "unique_name": "definition_target_01F3DLBD6LQ5P6syqb1vwIWGB3LSOBi9v9U",
+      "name": "NSO-JSONRPC",
+      "title": "NSO-JSONRPC",
+      "type": "json-rpc.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01FDD3GJGXAXK79rSv05qkaxyifhmEBkt5u",
+        "display_name": "NSO-JSONRPC",
+        "host": "10.18.180.140",
+        "port": 8080,
+        "protocol": "http"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01FDD3GJGXAXK79rSv05qkaxyifhmEBkt5u": {
+      "unique_name": "definition_runtime_user_01FDD3GJGXAXK79rSv05qkaxyifhmEBkt5u",
+      "name": "NSO-JSON-RPC-bpounds",
+      "title": "NSO-JSON-RPC-bpounds",
+      "type": "runtime_user.json-rpc_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "NSO-JSON-RPC-bpounds",
+        "password": "*****",
+        "user": "*****"
+      }
+    }
+  }
+}
