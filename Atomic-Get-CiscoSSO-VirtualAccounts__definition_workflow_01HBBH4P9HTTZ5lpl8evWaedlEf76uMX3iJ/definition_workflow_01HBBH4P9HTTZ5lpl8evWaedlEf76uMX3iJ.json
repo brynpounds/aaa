@@ -1,0 +1,118 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01HBBH4P9HTTZ5lpl8evWaedlEf76uMX3iJ",
+    "name": "Atomic-Get-CiscoSSO-VirtualAccounts",
+    "title": "Atomic-Get-CiscoSSO-VirtualAccounts",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "b01c9a60-636d-4372-80c0-2ec6f78c531a",
+          "scope": "static",
+          "name": "ClientID",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01HBBH4OFPOPP5i3W9JucVVcxrutsrxHOj6",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "bd8a0e18-989a-4975-aa35-0d1bd16041bf",
+          "scope": "static",
+          "name": "ClientSecret",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01HBBH4OFOUMC5eHim5AVjfdhlWbdtEyJV5",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Output",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01HBBH4OFP7511ChunxdOtn06g3SDM1t65y",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "description": "Register a SN in Cisco Smart License Account and Virtual Account",
+      "display_name": "Atomic-Get-CiscoSSO-VirtualAccounts",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01HBBH5GANFO17blLi651abpX6g2gUsQruD",
+        "name": "Execute Python Script",
+        "title": "Get Smart Accounts",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Get Smart Accounts",
+          "script": "import requests\nimport json\n\nurl = \"https://cloudsso.cisco.com/as/token.oauth2\"\n\npayload = \"client_id=$workflow.definition_workflow_01HBBH4P9HTTZ5lpl8evWaedlEf76uMX3iJ.static.variable_workflow_01HBBH4OFPOPP5i3W9JucVVcxrutsrxHOj6$\u0026client_secret=$workflow.definition_workflow_01HBBH4P9HTTZ5lpl8evWaedlEf76uMX3iJ.static.variable_workflow_01HBBH4OFOUMC5eHim5AVjfdhlWbdtEyJV5$\u0026grant_type=client_credentials\"\n\nheaders = {\n    'Content-Type': \"application/x-www-form-urlencoded\",\n    'User-Agent': \"PostmanRuntime/7.15.0\",\n    'Accept': \"*/*\",\n    'Host': \"cloudsso.cisco.com\",\n    'cookie': \"PF=jKSXROyJtTcjeVR2CfDaju\",\n    'accept-encoding': \"gzip, deflate\",\n    'content-length': \"127\",\n    'Connection': \"keep-alive\"\n    }\n\nresponse = requests.request(\"POST\", url, data=payload, headers=headers)\ntoken = response.text\n#thing=type(token)\nthing=json.loads(token)[\"access_token\"]\n\nurl = \"https://swapi.cisco.com/services/api/software/dms/v2/smartaccounts/sdwan-poc.cisco.com/virtualaccounts\"\n\nquerystring = {\"\":\"\"}\n\nheaders = {\n    'Authorization': \"Bearer \" + thing,\n    'User-Agent': \"PostmanRuntime/7.15.0\",\n    'Accept': \"*/*\",\n    'Host': \"swapi.cisco.com\",\n    'cookie': \"b420f0102ef5de46bb444e8272d86ddc=7d78fbd8c155e92fa9bde3bce64ea945\",\n    'accept-encoding': \"gzip, deflate\",\n    'Connection': \"keep-alive\"\n    }\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nmyoutput=response.text\n",
+          "script_queries": [
+            {
+              "script_query": "token",
+              "script_query_name": "CiscoSSOToken",
+              "script_query_type": "string"
+            },
+            {
+              "script_query": "myoutput",
+              "script_query_name": "Output",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01HBBH5OHN3MD29BNBBCx6sgqfh8gLLzjbU",
+        "name": "Set Variables",
+        "title": "Set Variables",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set Variables",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01HBBH4P9HTTZ5lpl8evWaedlEf76uMX3iJ.output.variable_workflow_01HBBH4OFP7511ChunxdOtn06g3SDM1t65y$",
+              "variable_value_new": "$activity.definition_activity_01HBBH5GANFO17blLi651abpX6g2gUsQruD.output.script_queries.Output$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  }
+}
