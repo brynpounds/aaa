@@ -1,0 +1,142 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01HBBP3TOMJG33bFLxlKujTQrC9FgWqks2P",
+    "name": "Atomic-Get-CiscoSSO-Devices",
+    "title": "Atomic-Get-CiscoSSO-Devices",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "b01c9a60-636d-4372-80c0-2ec6f78c531a",
+          "scope": "static",
+          "name": "ClientID",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01HBBP3TG12CL6BqSrITYElCh9pPFpfV6Cd",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "bd8a0e18-989a-4975-aa35-0d1bd16041bf",
+          "scope": "static",
+          "name": "ClientSecret",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01HBBP3TG197T7WlnupnB8mf4Ar5AzVt9qW",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "output",
+          "name": "Output",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01HBBP3TG1CLJ13lXE5g2g9QgMOkeD6o7u0",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "brectl",
+          "scope": "static",
+          "name": "VirtualAccount",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01HBBQMI3DKNQ0aLQ8l5KH47xy8t46e2VjJ",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "sdwan-poc.cisco.com",
+          "scope": "static",
+          "name": "SmartAccount",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01HBCLAOH3KHW3iIoJmpyZp9Ep2WbwFEvYY",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "description": "Register a SN in Cisco Smart License Account and Virtual Account",
+      "display_name": "Atomic-Get-CiscoSSO-Devices",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01HBBP4FOZKTU1YIXxYjeECG5pwSisrhtL5",
+        "name": "Execute Python Script",
+        "title": "Get Devices",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Get Devices",
+          "script": "import requests\nimport json\n\nurl = \"https://cloudsso.cisco.com/as/token.oauth2\"\n\npayload = \"client_id=$workflow.definition_workflow_01HBBP3TOMJG33bFLxlKujTQrC9FgWqks2P.static.variable_workflow_01HBBP3TG12CL6BqSrITYElCh9pPFpfV6Cd$\u0026client_secret=$workflow.definition_workflow_01HBBP3TOMJG33bFLxlKujTQrC9FgWqks2P.static.variable_workflow_01HBBP3TG197T7WlnupnB8mf4Ar5AzVt9qW$\u0026grant_type=client_credentials\"\n\nheaders = {\n    'Content-Type': \"application/x-www-form-urlencoded\",\n    'User-Agent': \"PostmanRuntime/7.15.0\",\n    'Accept': \"*/*\",\n    'Host': \"cloudsso.cisco.com\",\n    'cookie': \"PF=jKSXROyJtTcjeVR2CfDaju\",\n    'accept-encoding': \"gzip, deflate\",\n    'content-length': \"127\",\n    'Connection': \"keep-alive\"\n    }\n\nresponse = requests.request(\"POST\", url, data=payload, headers=headers)\ntoken = response.text\n#thing=type(token)\nthing=json.loads(token)[\"access_token\"]\n\nurl = \"https://swapi.cisco.com/services/api/software/dms/v2/smartaccounts/$workflow.definition_workflow_01HBBP3TOMJG33bFLxlKujTQrC9FgWqks2P.static.variable_workflow_01HBCLAOH3KHW3iIoJmpyZp9Ep2WbwFEvYY$/virtualaccounts/$workflow.definition_workflow_01HBBP3TOMJG33bFLxlKujTQrC9FgWqks2P.static.variable_workflow_01HBBQMI3DKNQ0aLQ8l5KH47xy8t46e2VjJ$/devices\"\n\nheaders = {\n    'Authorization': \"Bearer \" + thing,\n    'User-Agent': \"PostmanRuntime/7.15.0\",\n    'Accept': \"*/*\",\n    'Host': \"swapi.cisco.com\",\n    'cookie': \"b420f0102ef5de46bb444e8272d86ddc=710ed02969037a0ffd6647889d15ac81\",\n    'accept-encoding': \"gzip, deflate\",\n    'Connection': \"keep-alive\"\n    }\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nmyoutput=response.text\n",
+          "script_queries": [
+            {
+              "script_query": "token",
+              "script_query_name": "CiscoSSOToken",
+              "script_query_type": "string"
+            },
+            {
+              "script_query": "myoutput",
+              "script_query_name": "Output",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01HBBP4MJVMN95SLg8xbL26Okg9axJGuUnR",
+        "name": "Set Variables",
+        "title": "Set Variables",
+        "type": "core.set_multiple_variables",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Set Variables",
+          "skip_execution": false,
+          "variables_to_update": [
+            {
+              "variable_to_update": "$workflow.definition_workflow_01HBBP3TOMJG33bFLxlKujTQrC9FgWqks2P.output.variable_workflow_01HBBP3TG1CLJ13lXE5g2g9QgMOkeD6o7u0$",
+              "variable_value_new": "$activity.definition_activity_01HBBP4FOZKTU1YIXxYjeECG5pwSisrhtL5.output.script_queries.Output$"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  }
+}
