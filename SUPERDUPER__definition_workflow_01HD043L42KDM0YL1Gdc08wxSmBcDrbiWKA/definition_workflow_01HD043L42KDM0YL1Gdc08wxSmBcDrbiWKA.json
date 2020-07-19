@@ -1,0 +1,3120 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01HD043L42KDM0YL1Gdc08wxSmBcDrbiWKA",
+    "name": "1100 XE to SDWAN Upgrade Execute startup/DHCP 3.0",
+    "title": "1100 XE to SDWAN Upgrade Execute startup/DHCP 3.0",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Smart Account PassWord",
+          "type": "datatype.secure_string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01HDPZFHPT3277m7RwfRLJc2qBCXKqZwryo",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "SiteID",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01HDSXPS38DRD0B00tZBMb8cI3jowYU1QiB",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "SystemIP",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01HDSXUFOTETI3p8OcTqESZkgEXrggW7hJo",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Tenant Name",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01HD04O7W64953JLOGKfuC99Ofa3KtPSqxo",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Device Name",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01HD04TSBGS2H027qpRZD9ZiU8mnvJ8uEIr",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "Smart Account UserName",
+          "type": "datatype.string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01HDPZ8J9JND634QtPII4Pcg28rsQu9fRf2",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "1100 XE to SDWAN Upgrade Execute startup/DHCP 3.0",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "target_type": "msx-api.endpoint",
+        "target_id": "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01HD04HY0IBHJ3yh40AOv2SXwEWG73fUoSz",
+        "name": "Get Tenant ID",
+        "title": "Get Tenant ID",
+        "type": "workflow.sub_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Get Tenant ID",
+          "input": {
+            "variable_workflow_01H9LF5F6WWI92sL5QPZLNqhj86QKyyFESh": "$workflow.definition_workflow_01HD043L42KDM0YL1Gdc08wxSmBcDrbiWKA.input.variable_workflow_01HD04O7W64953JLOGKfuC99Ofa3KtPSqxo$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7",
+            "target_type": "msx-api.endpoint"
+          },
+          "workflow_id": "definition_workflow_01H9LF5FV6A271DGCLVzAAeDGuDrgW7XOkv"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01HD0543RCYHD0GD5FQH40WeAcozw25YcBW",
+        "name": "Get Device UUID",
+        "title": "Get Device UUID",
+        "type": "workflow.sub_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Get Device UUID",
+          "input": {
+            "variable_workflow_01H9LF5I0KXSJ7j0EQd9NghL1iPHFpzEzmq": "$workflow.definition_workflow_01HD043L42KDM0YL1Gdc08wxSmBcDrbiWKA.input.variable_workflow_01HD04TSBGS2H027qpRZD9ZiU8mnvJ8uEIr$",
+            "variable_workflow_01H9LF5I0L0ZY43IjPSSkKvmP9u2k7DjY2L": "$activity.definition_activity_01HD04HY0IBHJ3yh40AOv2SXwEWG73fUoSz.output.variable_workflow_01H9LF5F6WCTU6qRXcY0qMN3vGVkTmkXp59$",
+            "variable_workflow_01H9LF5I0L8FL0iMvPXoh4BXx1XO4fTUVXV": "$activity.definition_activity_01HD04HY0IBHJ3yh40AOv2SXwEWG73fUoSz.output.variable_workflow_01H9LF5F6WJMX6ANllItGhf6XPHi66NAOlG$",
+            "variable_workflow_01H9LF5I0LI8S3TgsL6yQ1SUEemTcXclRxm": "$activity.definition_activity_01HD04HY0IBHJ3yh40AOv2SXwEWG73fUoSz.output.variable_workflow_01H9LF5F6WQ522S24TCdcU9zMH9MFNYT3JS$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7",
+            "target_type": "msx-api.endpoint"
+          },
+          "workflow_id": "definition_workflow_01H9LF5II6AFD0WCSlPiT2WqUxm0ZXjiNLD"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01HD05J7S7TF86jKs1d0xJphNAEP1N0XZhi",
+        "name": "Get Device Details",
+        "title": "Get Device Details",
+        "type": "workflow.sub_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Get Device Details",
+          "input": {
+            "variable_workflow_01HCW0OFAGDLS5W6gWS0wKADYpRYIbc4wTZ": "$activity.definition_activity_01HD0543RCYHD0GD5FQH40WeAcozw25YcBW.output.variable_workflow_01H9LF5I0KH5P5agTp6HGGA7FnEgfTF162V$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01HCV8NVL5KMD0PgNgoyy1nLEcAda60Q0El",
+            "target_type": "json-rpc.endpoint"
+          },
+          "workflow_id": "definition_workflow_01H4F341U3X6B2rCzFev49V2cjNyUCd4YaT"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01HD05VCTGKCS4CSinq3taDfgPaDxYvBvvZ",
+        "name": "Add Device to Smart Account",
+        "title": "Add Device to Smart Account",
+        "type": "workflow.sub_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Add Device to Smart Account",
+          "input": {
+            "variable_workflow_01HBCOQYGNMNQ0x5B1GFVrFOjxlE3Ts9o0a": "$activity.definition_activity_01HD05J7S7TF86jKs1d0xJphNAEP1N0XZhi.output.variable_workflow_01HCWG7XGXUUY6q3XREIHXH4FgmEmvxqIPT$",
+            "variable_workflow_01HBCP29T211U7bZSJTjhTcU5tINhwrqqVL": "$activity.definition_activity_01HD05J7S7TF86jKs1d0xJphNAEP1N0XZhi.output.variable_workflow_01HCWG28YJHJU5FA4p32FQ1fkjc7NKHhJJg$",
+            "variable_workflow_01HBCPF0PCZT72S8tj1VticxZnmR7eo0mzP": "BRECTL-VBOND-1",
+            "variable_workflow_01HDNY82X2YF90coMuegqYZpG7YoBkagZtw": "$activity.definition_activity_01HD05J7S7TF86jKs1d0xJphNAEP1N0XZhi.output.variable_workflow_01HDNWR72BGBK1RujOMZ9eaiPPBihTnYE4E$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "no_target": true
+          },
+          "workflow_id": "definition_workflow_01HBCM5L6Q7HF188NAJVwLmasdEG74gN3fj"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01HDPZLO1K3LU4IGmesBjNpVwjJo9d1YLFC",
+        "name": "Sync vManage with Smart Account",
+        "title": "Sync vManage with Smart Account",
+        "type": "workflow.sub_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Sync vManage with Smart Account",
+          "input": {
+            "variable_workflow_01HDPEGZ21BU86A9QN3K64FEVvKvxP49L2R": "$workflow.definition_workflow_01HD043L42KDM0YL1Gdc08wxSmBcDrbiWKA.input.variable_workflow_01HDPZ8J9JND634QtPII4Pcg28rsQu9fRf2$",
+            "variable_workflow_01HDPEMG9AANQ1m0yFkaCrXSdrIaBQfIqtK": "$workflow.definition_workflow_01HD043L42KDM0YL1Gdc08wxSmBcDrbiWKA.input.variable_workflow_01HDPZFHPT3277m7RwfRLJc2qBCXKqZwryo$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "no_target": true
+          },
+          "workflow_id": "definition_workflow_01HDPDWDQRC4S1eUOi3O8oXfUhLB3GncXTF"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01HDSSAAMH4CB3qPOXJ4nZplLdKDAeiwZmG",
+        "name": "Ask MSX for SDWAN details",
+        "title": "Ask MSX for SDWAN details",
+        "type": "workflow.sub_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Ask MSX for SDWAN details",
+          "input": {
+            "variable_workflow_01HDSQZ9ZBJFN6ibmdsYSLHbOKyez3KAWvD": "$activity.definition_activity_01HD04HY0IBHJ3yh40AOv2SXwEWG73fUoSz.output.variable_workflow_01H9LF5F6WQ522S24TCdcU9zMH9MFNYT3JS$",
+            "variable_workflow_01HDSRVLDV8DK6uX49o3vdEHQSkxL6OQ98Z": "$activity.definition_activity_01HD04HY0IBHJ3yh40AOv2SXwEWG73fUoSz.output.variable_workflow_01H9LF5F6WCTU6qRXcY0qMN3vGVkTmkXp59$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7",
+            "target_type": "msx-api.endpoint"
+          },
+          "workflow_id": "definition_workflow_01HDRKM0T0FDZ35IoulChMIwZF8z3XHcAoE"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01HDSX6F89CTX6z2cGwkkZ4SDBOruaZR3T2",
+        "name": "Create ciscosdwan.cfg file",
+        "title": "Create ciscosdwan.cfg file",
+        "type": "workflow.sub_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Create ciscosdwan.cfg file",
+          "input": {
+            "variable_workflow_01HDSVOFXX4Q32RL1ub52fU3yiWU9WoV5N7": "$workflow.definition_workflow_01HD043L42KDM0YL1Gdc08wxSmBcDrbiWKA.input.variable_workflow_01HDSXUFOTETI3p8OcTqESZkgEXrggW7hJo$",
+            "variable_workflow_01HDSVTPLT47K4K9Cx3poE12tQ4BdPDVVDu": "$workflow.definition_workflow_01HD043L42KDM0YL1Gdc08wxSmBcDrbiWKA.input.variable_workflow_01HDSXPS38DRD0B00tZBMb8cI3jowYU1QiB$",
+            "variable_workflow_01HDSW4UP9XLG4IpxNe2nGgiWNdGmZdpu67": "$activity.definition_activity_01HDSSAAMH4CB3qPOXJ4nZplLdKDAeiwZmG.output.variable_workflow_01HDSP43RDB0M0Hqz0n8mxsrmb6KaU4qojL$",
+            "variable_workflow_01HDSW9SWVI4G7Uf1OISFrSsgvWn1SGlo65": "$activity.definition_activity_01HDSSAAMH4CB3qPOXJ4nZplLdKDAeiwZmG.output.variable_workflow_01HDSP8PD202A1l3k9xMSWdamLM16QrsbbL$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "no_target": true
+          },
+          "workflow_id": "definition_workflow_01HDSV1V4DUSR7MH1m3MUx4gxmjkqYU0k01"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01HD080F34BQW6lZ9N8QE06dfrD2B4JgYs4",
+        "name": "Verify RomMon Checksum",
+        "title": "Verify RomMon Checksum",
+        "type": "workflow.sub_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Verify RomMon Checksum",
+          "input": {
+            "variable_workflow_01HCY8JX7FHIR0TgqLk08Hew5ZVUHmd1AXW": "C1100-rommon-1612-1r-SPA.pkg",
+            "variable_workflow_01HCYKL7XKBCG3yqI23T1nHo7Amme35mJo4": "$activity.definition_activity_01HD0543RCYHD0GD5FQH40WeAcozw25YcBW.output.variable_workflow_01H9LF5I0KH5P5agTp6HGGA7FnEgfTF162V$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01HCV8NVL5KMD0PgNgoyy1nLEcAda60Q0El",
+            "target_type": "json-rpc.endpoint"
+          },
+          "workflow_id": "definition_workflow_01HCY149LGEWA4mwzYDyk2Ho0QUu5Kbm5SZ"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01HD0CPQWNDPM2qIc0SIwDCUkN1LGJp9plP",
+        "name": "Verify SDWAN CheckSum",
+        "title": "Verify SDWAN CheckSum",
+        "type": "workflow.sub_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Verify SDWAN CheckSum",
+          "input": {
+            "variable_workflow_01HCY8JX7FHIR0TgqLk08Hew5ZVUHmd1AXW": "c1100-ucmk9.16.12.4.SPA.bin",
+            "variable_workflow_01HCYKL7XKBCG3yqI23T1nHo7Amme35mJo4": "$activity.definition_activity_01HD0543RCYHD0GD5FQH40WeAcozw25YcBW.output.variable_workflow_01H9LF5I0KH5P5agTp6HGGA7FnEgfTF162V$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01HCV8NVL5KMD0PgNgoyy1nLEcAda60Q0El",
+            "target_type": "json-rpc.endpoint"
+          },
+          "workflow_id": "definition_workflow_01HCY149LGEWA4mwzYDyk2Ho0QUu5Kbm5SZ"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01HDT7O7TPB4R1pD6tFpSuDbGtC4V0680VE",
+        "name": "Put ciscosdwan.cfg on Device",
+        "title": "Put ciscosdwan.cfg on Device",
+        "type": "workflow.sub_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Put ciscosdwan.cfg on Device",
+          "input": {
+            "variable_workflow_01H9LF5FUYJZM3W4LjxTPcQZj0VrUjNfuKq": "copy http://10.18.180.141/$workflow.definition_workflow_01HD043L42KDM0YL1Gdc08wxSmBcDrbiWKA.input.variable_workflow_01HD04TSBGS2H027qpRZD9ZiU8mnvJ8uEIr$_new_ciscosdwan.cfg bootflash:ciscosdwan.cfg",
+            "variable_workflow_01H9LF5FUZE0D1MPjGyCdyGEc8n8WnMVoft": "$activity.definition_activity_01HD0543RCYHD0GD5FQH40WeAcozw25YcBW.output.variable_workflow_01H9LF5I0KH5P5agTp6HGGA7FnEgfTF162V$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7",
+            "target_type": "msx-api.endpoint"
+          },
+          "workflow_id": "definition_workflow_01H9LF5GTRU3V3WS5Qy0lPHywTVly89NPFm"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01HDTB7H62WYY39mxcbIvL7LXAAkzxSQzLL",
+        "name": "Upgrade RomMon",
+        "title": "Upgrade RomMon",
+        "type": "workflow.sub_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Upgrade RomMon",
+          "input": {
+            "variable_workflow_01H8L2YJB4E711QHZ6wIQA7Jg9B5UKYc3cR": "upgrade rom-monitor filename bootflash:C1100-rommon-1612-1r-SPA.pkg R0",
+            "variable_workflow_01H8L2YJB4OD62JVowzEdQtVSs5jflOxzAS": "$activity.definition_activity_01HD0543RCYHD0GD5FQH40WeAcozw25YcBW.output.variable_workflow_01H9LF5I0KH5P5agTp6HGGA7FnEgfTF162V$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7",
+            "target_type": "msx-api.endpoint"
+          },
+          "workflow_id": "definition_workflow_01H8L2YJI7XH133b1VmyrppdHVoJykN9CKy"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01HDTFVA6U3010ITypic3kdOFY7VsTdQW5h",
+        "name": "Upgrade to SDWAN",
+        "title": "Upgrade to SDWAN",
+        "type": "workflow.sub_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Upgrade to SDWAN",
+          "input": {
+            "variable_workflow_01H8L2YJB4E711QHZ6wIQA7Jg9B5UKYc3cR": "event manager run upgrade_xe_to_sdwan_execute",
+            "variable_workflow_01H8L2YJB4OD62JVowzEdQtVSs5jflOxzAS": "$activity.definition_activity_01HD0543RCYHD0GD5FQH40WeAcozw25YcBW.output.variable_workflow_01H9LF5I0KH5P5agTp6HGGA7FnEgfTF162V$"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7",
+            "target_type": "msx-api.endpoint"
+          },
+          "workflow_id": "definition_workflow_01H8L2YJI7XH133b1VmyrppdHVoJykN9CKy"
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7": {
+      "unique_name": "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7",
+      "name": "MSX API",
+      "description": "MSX API",
+      "type": "msx-api.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "clientId": "nfv-service",
+        "clientSecret": "*****",
+        "default_runtime_user_id": "definition_runtime_user_01AP3ABOXO4GP34LXxefnUlt5r8mJbCHCgt",
+        "display_name": "MSX API",
+        "host": "10.18.180.140",
+        "port": 8765,
+        "protocol": "http"
+      }
+    },
+    "definition_target_01H4JNO7SIPFW3MQaJks7S9lyooOqYfDeE7": {
+      "unique_name": "definition_target_01H4JNO7SIPFW3MQaJks7S9lyooOqYfDeE7",
+      "name": "local-msx",
+      "title": "local-msx",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": true,
+        "display_name": "local-msx",
+        "host": "10.18.180.140",
+        "no_runtime_user": true,
+        "port": 8765,
+        "protocol": "http"
+      }
+    },
+    "definition_target_01HCV8NVL5KMD0PgNgoyy1nLEcAda60Q0El": {
+      "unique_name": "definition_target_01HCV8NVL5KMD0PgNgoyy1nLEcAda60Q0El",
+      "name": "JSON RPC 10.18.180.140",
+      "title": "JSON RPC 10.18.180.140",
+      "type": "json-rpc.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01FDD3GJGXAXK79rSv05qkaxyifhmEBkt5u",
+        "display_name": "JSON RPC 10.18.180.140",
+        "host": "10.18.180.140",
+        "port": 8080,
+        "protocol": "http"
+      }
+    },
+    "definition_target_01HCVWI19IOQP2sTWLBPzESCmswx3VnfOfb": {
+      "unique_name": "definition_target_01HCVWI19IOQP2sTWLBPzESCmswx3VnfOfb",
+      "name": "NSO (legacy) API",
+      "title": "NSO (legacy) API",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01HCVWAZHC9FM2S0R4tI6IdEqgORjsHKOkq",
+        "disable_certificate_validation": true,
+        "display_name": "NSO (legacy) API",
+        "host": "10.18.180.140",
+        "no_runtime_user": false,
+        "port": 8080,
+        "protocol": "http"
+      }
+    },
+    "definition_target_01HDRZQO8VQMH5eopXlKAxuDNuJ89999VpK": {
+      "unique_name": "definition_target_01HDRZQO8VQMH5eopXlKAxuDNuJ89999VpK",
+      "name": "MSX API 10.18.180.140",
+      "title": "MSX API 10.18.180.140",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01FFBOXV8HDSR2d8raS39LYRcCpFOCD12el",
+        "disable_certificate_validation": true,
+        "display_name": "MSX API 10.18.180.140",
+        "host": "10.18.180.140",
+        "no_runtime_user": false,
+        "port": 8765,
+        "protocol": "http"
+      }
+    },
+    "definition_target_01HDT42UW8ZQ41nUMVxnKKk0w3g3rWXFBeK": {
+      "unique_name": "definition_target_01HDT42UW8ZQ41nUMVxnKKk0w3g3rWXFBeK",
+      "name": "10.18.180.141",
+      "title": "10.18.180.141",
+      "type": "terminal.unix_linux_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "bash_shell": "/bin/bash",
+        "default_runtime_user_id": "definition_runtime_user_01HDT3QX9T12W3rgzo4Kl2HiVOBTJUOlLD9",
+        "display_name": "10.18.180.141",
+        "host": "10.18.180.141",
+        "port": 22
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01AP3ABOXO4GP34LXxefnUlt5r8mJbCHCgt": {
+      "unique_name": "definition_runtime_user_01AP3ABOXO4GP34LXxefnUlt5r8mJbCHCgt",
+      "name": "MSX System",
+      "description": "MSX System",
+      "type": "runtime_user.msx-api_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "MSX System",
+        "password": "*****",
+        "username": "*****"
+      }
+    },
+    "definition_runtime_user_01FDD3GJGXAXK79rSv05qkaxyifhmEBkt5u": {
+      "unique_name": "definition_runtime_user_01FDD3GJGXAXK79rSv05qkaxyifhmEBkt5u",
+      "name": "NSO-JSON-RPC-bpounds",
+      "title": "NSO-JSON-RPC-bpounds",
+      "type": "runtime_user.json-rpc_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "NSO-JSON-RPC-bpounds",
+        "password": "*****",
+        "user": "*****"
+      }
+    },
+    "definition_runtime_user_01FFBOXV8HDSR2d8raS39LYRcCpFOCD12el": {
+      "unique_name": "definition_runtime_user_01FFBOXV8HDSR2d8raS39LYRcCpFOCD12el",
+      "name": "superuser",
+      "title": "superuser",
+      "type": "runtime_user.web-service_basic_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "auth_option": "*****",
+        "basic_password": "*****",
+        "basic_username": "*****",
+        "display_name": "superuser"
+      }
+    },
+    "definition_runtime_user_01HCVWAZHC9FM2S0R4tI6IdEqgORjsHKOkq": {
+      "unique_name": "definition_runtime_user_01HCVWAZHC9FM2S0R4tI6IdEqgORjsHKOkq",
+      "name": "NSO Legacy API",
+      "title": "NSO Legacy API",
+      "type": "runtime_user.web-service_basic_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "auth_option": "*****",
+        "basic_password": "*****",
+        "basic_username": "*****",
+        "display_name": "NSO Legacy API"
+      }
+    },
+    "definition_runtime_user_01HDT3QX9T12W3rgzo4Kl2HiVOBTJUOlLD9": {
+      "unique_name": "definition_runtime_user_01HDT3QX9T12W3rgzo4Kl2HiVOBTJUOlLD9",
+      "name": "10.18.180.141",
+      "title": "10.18.180.141",
+      "type": "runtime_user.terminal_password_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "10.18.180.141",
+        "password": "*****",
+        "user": "*****"
+      }
+    }
+  },
+  "subworkflows": [
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01HBCM5L6Q7HF188NAJVwLmasdEG74gN3fj",
+        "name": "Atomic-Get-CiscoSSO-AddDeviceSerialNumber",
+        "title": "Atomic-Get-CiscoSSO-AddDeviceSerialNumber",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "Profile Name",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HBCPF0PCZT72S8tj1VticxZnmR7eo0mzP",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "brectl",
+              "scope": "static",
+              "name": "VirtualAccount",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HBCM5KT9HOJ1hJO5r6YRroCVTyHqK5Kdy",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "Serial Number",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HBCOQYGNMNQ0x5B1GFVrFOjxlE3Ts9o0a",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "sdwan-poc.cisco.com",
+              "scope": "static",
+              "name": "SmartAccount",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HBCM5KT9KUF7ZRsmH1ykeCwytLdNzEYlI",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "Platform",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HBCP29T211U7bZSJTjhTcU5tINhwrqqVL",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "Output",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HBCM5KT9EBX3RZDWt8PCHmo4lNyPC3KPx",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "bd8a0e18-989a-4975-aa35-0d1bd16041bf",
+              "scope": "static",
+              "name": "ClientSecret",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HBCM5KT9AOC7bQlhEp8xdkpyObP1ZmNac",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "b01c9a60-636d-4372-80c0-2ec6f78c531a",
+              "scope": "static",
+              "name": "ClientID",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HBCM5KT93RQ6I7msqktHyFewweRaqCSzY",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "CertificateSN",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HDNY82X2YF90coMuegqYZpG7YoBkagZtw",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "description": "Register a SN in Cisco Smart License Account and Virtual Account",
+          "display_name": "Atomic-Get-CiscoSSO-AddDeviceSerialNumber",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "specify_on_workflow_start": false,
+            "target_default": true
+          },
+          "target": {
+            "execute_on_target_group": false,
+            "execute_on_workflow_target": false,
+            "no_target": true,
+            "specify_on_workflow_start": false
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01HBCM6BEF8V03Dc7wBPUodG4XrzpM4Y5nV",
+            "name": "Execute Python Script",
+            "title": "Add Device to Smart Account",
+            "type": "python3.script",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Add Device to Smart Account",
+              "script": "import requests\nimport json\n\nurl = \"https://cloudsso.cisco.com/as/token.oauth2\"\n\npayload = 'client_id=b01c9a60-636d-4372-80c0-2ec6f78c531a\u0026client_secret=bd8a0e18-989a-4975-aa35-0d1bd16041bf\u0026grant_type=client_credentials'\nheaders = {\n  'Content-Type': 'application/x-www-form-urlencoded',\n  'Cookie': 'PF=jKSXROyJtTcjeVR2CfDaju'\n}\n\nresponse = requests.request(\"POST\", url, headers=headers, data = payload)\ntoken=json.loads(response.text)[\"access_token\"]\n\n\nurl = \"https://swapi.cisco.com/services/api/software/dms/v2/smartaccounts/sdwan-poc.cisco.com/virtualaccounts/brectl/devices\"\n\npayload = \"{\\n  \\\"overWrite\\\": false,\\n  \\\"devices\\\": [\\n    {\\n      \\\"id\\\": \\\"1\\\",\\n      \\\"device\\\": {\\n        \\\"udi\\\": [\\n          {\\n            \\\"name\\\": \\\"udiProductId\\\",\\n            \\\"value\\\": \\\"$workflow.definition_workflow_01HBCM5L6Q7HF188NAJVwLmasdEG74gN3fj.input.variable_workflow_01HBCP29T211U7bZSJTjhTcU5tINhwrqqVL$\\\"\\n          },\\n          {\\n            \\\"name\\\": \\\"udiSerialNumber\\\",\\n            \\\"value\\\": \\\"$workflow.definition_workflow_01HBCM5L6Q7HF188NAJVwLmasdEG74gN3fj.input.variable_workflow_01HBCOQYGNMNQ0x5B1GFVrFOjxlE3Ts9o0a$\\\"\\n          }\\n        ]\\n       },\\n      \\\"profileName\\\": \\\"$workflow.definition_workflow_01HBCM5L6Q7HF188NAJVwLmasdEG74gN3fj.input.variable_workflow_01HBCPF0PCZT72S8tj1VticxZnmR7eo0mzP$\\\",\\n      \\\"certificateSerialNumber\\\":\\\"$workflow.definition_workflow_01HBCM5L6Q7HF188NAJVwLmasdEG74gN3fj.input.variable_workflow_01HDNY82X2YF90coMuegqYZpG7YoBkagZtw$\\\",\\n      \\\"profileUUID\\\": \\\"{{pnpprofileuuid}}\\\"\\n    }\\n  ]\\n}\"\nheaders = {\n  'Authorization': 'Bearer ' + token,\n  'Content-Type': 'application/json',\n  'Cookie': 'b420f0102ef5de46bb444e8272d86ddc=7d78fbd8c155e92fa9bde3bce64ea945'\n}\n\nresponse = requests.request(\"POST\", url, headers=headers, data = payload)\n\nmyoutput=json.loads(response.text)",
+              "script_queries": [
+                {
+                  "script_query": "token",
+                  "script_query_name": "CiscoSSOToken",
+                  "script_query_type": "string"
+                },
+                {
+                  "script_query": "myoutput",
+                  "script_query_name": "Output",
+                  "script_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HBCM6IG5ZGN1aq6gxhnxjTNsM8MyLzNbX",
+            "name": "Set Variables",
+            "title": "Set Variables",
+            "type": "core.set_multiple_variables",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Set Variables",
+              "skip_execution": false,
+              "variables_to_update": [
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01HBCM5L6Q7HF188NAJVwLmasdEG74gN3fj.output.variable_workflow_01HBCM5KT9EBX3RZDWt8PCHmo4lNyPC3KPx$",
+                  "variable_value_new": "$activity.definition_activity_01HBCM6BEF8V03Dc7wBPUodG4XrzpM4Y5nV.output.script_queries.Output$"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          }
+        ],
+        "categories": [
+          "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+        ]
+      }
+    },
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01HDPDWDQRC4S1eUOi3O8oXfUhLB3GncXTF",
+        "name": "Atomic vManage Sync Smart Account 3.0",
+        "title": "Atomic vManage Sync Smart Account 3.0",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "UserName",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HDPEGZ21BU86A9QN3K64FEVvKvxP49L2R",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.secure_string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "PassWord",
+              "type": "datatype.secure_string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HDPEMG9AANQ1m0yFkaCrXSdrIaBQfIqtK",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "Response",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HDQNCN7MX0D66j0dc3gTLA70Am06XhxJJ",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "display_name": "Atomic vManage Sync Smart Account 3.0",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "specify_on_workflow_start": false,
+            "target_default": true
+          },
+          "target": {
+            "execute_on_target_group": false,
+            "execute_on_workflow_target": false,
+            "no_target": true,
+            "specify_on_workflow_start": false
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01HDPFSKOV9862NxbuRKnYADW4VFqrRUgyQ",
+            "name": "Execute Python Script",
+            "title": "Execute Python Script",
+            "type": "python3.script",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Execute Python Script",
+              "script": "import requests\n\nurl = \"https://10.18.180.160:8443/j_security_check\"\npayload = 'j_username=admin\u0026j_password=Cisco123%23'\nheaders = {'Content-Type': 'application/x-www-form-urlencoded'}\n\nresponse = requests.request(\"POST\", url, headers=headers, data = payload, verify=False)\ncookie=response.cookies.get_dict()[\"JSESSIONID\"]\n\n\nurl = \"https://10.18.180.160:8443/dataservice/system/device/smartaccount/sync\"\n\npayload = \"{\\\"username\\\":\\\"$workflow.definition_workflow_01HDPDWDQRC4S1eUOi3O8oXfUhLB3GncXTF.input.variable_workflow_01HDPEGZ21BU86A9QN3K64FEVvKvxP49L2R$\\\",\\\"password\\\":\\\"$workflow.definition_workflow_01HDPDWDQRC4S1eUOi3O8oXfUhLB3GncXTF.input.variable_workflow_01HDPEMG9AANQ1m0yFkaCrXSdrIaBQfIqtK$\\\",\\\"validity_string\\\":\\\"valid\\\"}\"\nheaders = {\n  'Content-Type': 'application/json',\n  'Cookie': 'JSESSIONID=' + cookie\n}\n\nresponse = requests.request(\"POST\", url, headers=headers, data = payload, verify=False)\n\nresult=response\n\n\n\n\n",
+              "script_queries": [
+                {
+                  "script_query": "result",
+                  "script_query_name": "Result",
+                  "script_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          }
+        ],
+        "categories": [
+          "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+        ]
+      }
+    },
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01HDSV1V4DUSR7MH1m3MUx4gxmjkqYU0k01",
+        "name": "Atomic Create SDWAN startup ",
+        "title": "Atomic Create SDWAN startup ",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "vBondAddress",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HDSW9SWVI4G7Uf1OISFrSsgvWn1SGlo65",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "NewStartupConfig",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HDSZW1M4SJT43HzXfGLulfZX4FrN1U26D",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "SystemIP",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HDSVOFXX4Q32RL1ub52fU3yiWU9WoV5N7",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "SiteID",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HDSVTPLT47K4K9Cx3poE12tQ4BdPDVVDu",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "OrgName",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HDSW4UP9XLG4IpxNe2nGgiWNdGmZdpu67",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "display_name": "Atomic Create SDWAN startup ",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "specify_on_workflow_start": false,
+            "target_default": true
+          },
+          "target": {
+            "execute_on_target_group": false,
+            "execute_on_workflow_target": false,
+            "no_target": true,
+            "specify_on_workflow_start": false
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01HDSVCTQKT7U6ufiVZAkGpHYSp5eS5Wfx2",
+            "name": "Execute Python Script",
+            "title": "Execute Python Script",
+            "type": "python3.script",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Execute Python Script",
+              "script": "template='''#cloud-boothook\n  viptela-system:system\n   system-ip             ***System-IP***\n   site-id               ***Site-ID***\n   sp-organization-name  ***Org-Name***\n   organization-name     ***Org-Name***\n   console-baud-rate     9600\n   vbond ***vBond-IP*** port 12346\n\n  aaa authorization exec default local\n  username admin privilege 15 secret 9 $9$3V6L3V6L2VUI2k$ysPnXOdg8RLj9KgMdmfHdSHkdaMmiHzGaUpcqH6pfTo\n  interface GigabitEthernet0/0/0\n   no shutdown\n   ip dhcp client default-router distance 1\n   ip address dhcp client-id GigabitEthernet0/0/0\n   ip mtu    1500\n   mtu 1500\n   negotiation auto\n  exit\n  interface Tunnel0\n   no shutdown\n   ip unnumbered GigabitEthernet0/0/0\n   no ip redirects\n   tunnel source GigabitEthernet0/0/0\n   tunnel mode sdwan\n  exit\n!\n  sdwan\n   interface GigabitEthernet0/0/0\n    tunnel-interface\n     encapsulation ipsec weight 1\n     no border\n     color private1\n     no last-resort-circuit\n     no low-bandwidth-link\n     control-connections\n     no vbond-as-stun-server\n     vmanage-connection-preference 5\n     port-hop\n     carrier                       default\n     nat-refresh-interval          5\n     hello-interval                1000\n     hello-tolerance               12\n     allow-service all\n     no allow-service bgp\n     allow-service dhcp\n     allow-service dns\n     allow-service icmp\n     allow-service sshd\n     no allow-service netconf\n     no allow-service ntp\n     no allow-service ospf\n     no allow-service stun\n     no allow-service snmp\n    exit\n  exit\n  omp\n   no shutdown\n   send-path-limit  4\n   ecmp-limit       4\n   graceful-restart\n   no as-dot-notation\n   timers\n    holdtime               60\n    advertisement-interval 1\n    graceful-restart-timer 43200\n    eor-timer              300\n   exit\n'''\nnew_ciscosdwancfg=\"\"\nnew_ciscosdwancfg = template.replace(\"***System-IP***\",\"$workflow.definition_workflow_01HDSV1V4DUSR7MH1m3MUx4gxmjkqYU0k01.input.variable_workflow_01HDSVOFXX4Q32RL1ub52fU3yiWU9WoV5N7$\").replace(\"***Site-ID***\",\"$workflow.definition_workflow_01HDSV1V4DUSR7MH1m3MUx4gxmjkqYU0k01.input.variable_workflow_01HDSVTPLT47K4K9Cx3poE12tQ4BdPDVVDu$\").replace(\"***Org-Name***\",\"$workflow.definition_workflow_01HDSV1V4DUSR7MH1m3MUx4gxmjkqYU0k01.input.variable_workflow_01HDSW4UP9XLG4IpxNe2nGgiWNdGmZdpu67$\").replace(\"***vBond-IP***\",\"$workflow.definition_workflow_01HDSV1V4DUSR7MH1m3MUx4gxmjkqYU0k01.input.variable_workflow_01HDSW9SWVI4G7Uf1OISFrSsgvWn1SGlo65$\")",
+              "script_queries": [
+                {
+                  "script_query": "new_ciscosdwancfg",
+                  "script_query_name": "NewSdwanStartupConfig",
+                  "script_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HDSZOLWP75S2VvEORKDlbfueDVNS4Kg73",
+            "name": "Set Variables",
+            "title": "Set Variables",
+            "type": "core.set_multiple_variables",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Set Variables",
+              "skip_execution": false,
+              "variables_to_update": [
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01HDSV1V4DUSR7MH1m3MUx4gxmjkqYU0k01.output.variable_workflow_01HDSZW1M4SJT43HzXfGLulfZX4FrN1U26D$",
+                  "variable_value_new": "$activity.definition_activity_01HDSVCTQKT7U6ufiVZAkGpHYSp5eS5Wfx2.output.script_queries.NewSdwanStartupConfig$"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HDT4E9B706R1HfYFPbaCKH2GMo1gq0lfd",
+            "name": "Write File",
+            "title": "Write File",
+            "type": "terminal.write_file",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "content": "$activity.definition_activity_01HDSVCTQKT7U6ufiVZAkGpHYSp5eS5Wfx2.output.script_queries.NewSdwanStartupConfig$",
+              "continue_on_failure": false,
+              "display_name": "Write File",
+              "encoding": "utf-8",
+              "file_name": "/var/www/html/1111a_new_ciscosdwan.cfg",
+              "options": "overwrite",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01HDT42UW8ZQ41nUMVxnKKk0w3g3rWXFBeK"
+              }
+            },
+            "object_type": "definition_activity"
+          }
+        ],
+        "categories": [
+          "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+        ]
+      }
+    },
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01HDRKM0T0FDZ35IoulChMIwZF8z3XHcAoE",
+        "name": "Atomic Get Viptela details",
+        "title": "Atomic Get Viptela details",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "Token",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HDSRVLDV8DK6uX49o3vdEHQSkxL6OQ98Z",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "OrgName",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HDSP43RDB0M0Hqz0n8mxsrmb6KaU4qojL",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "vBondAddress",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HDSP8PD202A1l3k9xMSWdamLM16QrsbbL",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "TenantID",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HDSQZ9ZBJFN6ibmdsYSLHbOKyez3KAWvD",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "display_name": "Atomic Get Viptela details",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "specify_on_workflow_start": false,
+            "target_default": true
+          },
+          "target": {
+            "target_type": "msx-api.endpoint",
+            "target_id": "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7",
+            "execute_on_workflow_target": true
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01HDRVNKWHFZW2H5X4FYUJIKPL7rgIOoWZW",
+            "name": "HTTP Request",
+            "title": "HTTP Request",
+            "type": "web-service.http_request",
+            "base_type": "activity",
+            "properties": {
+              "accept": "application/json",
+              "action_timeout": 180,
+              "allow_auto_redirect": true,
+              "content_type": "application/json",
+              "continue_on_error_status_code": false,
+              "continue_on_failure": false,
+              "custom_headers": [
+                {
+                  "name": "Authorization",
+                  "value": "Bearer $workflow.definition_workflow_01HDRKM0T0FDZ35IoulChMIwZF8z3XHcAoE.input.variable_workflow_01HDSRVLDV8DK6uX49o3vdEHQSkxL6OQ98Z$"
+                }
+              ],
+              "display_name": "HTTP Request",
+              "method": "GET",
+              "relative_url": "/sdwanservice/v2/controlplanes?tenantId=$workflow.definition_workflow_01HDRKM0T0FDZ35IoulChMIwZF8z3XHcAoE.input.variable_workflow_01HDSQZ9ZBJFN6ibmdsYSLHbOKyez3KAWvD$",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01HDRZQO8VQMH5eopXlKAxuDNuJ89999VpK"
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HDSGHZ26FOU0JG6vUUVbClJFU8zXJhcWW",
+            "name": "HTTP Request",
+            "title": "HTTP Request",
+            "type": "web-service.http_request",
+            "base_type": "activity",
+            "properties": {
+              "accept": "application/json",
+              "action_timeout": 180,
+              "allow_auto_redirect": true,
+              "content_type": "application/json",
+              "continue_on_error_status_code": false,
+              "continue_on_failure": false,
+              "custom_headers": [
+                {
+                  "name": "Authorization",
+                  "value": "Bearer $workflow.definition_workflow_01HDRKM0T0FDZ35IoulChMIwZF8z3XHcAoE.input.variable_workflow_01HDSRVLDV8DK6uX49o3vdEHQSkxL6OQ98Z$"
+                }
+              ],
+              "display_name": "HTTP Request",
+              "method": "GET",
+              "relative_url": "/sdwanservice/v1/controlplane/$workflow.definition_workflow_01HDRKM0T0FDZ35IoulChMIwZF8z3XHcAoE.input.variable_workflow_01HDSQZ9ZBJFN6ibmdsYSLHbOKyez3KAWvD$/component",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "override_workflow_target_group_criteria": false,
+                "target_id": "definition_target_01HDRZQO8VQMH5eopXlKAxuDNuJ89999VpK",
+                "use_workflow_target_group": false
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HDSIKTAF66X3iTEqvZsNUi0NXGE3JNFRZ",
+            "name": "JSONPath Query",
+            "title": "JSONPath Query",
+            "type": "corejava.jsonpathquery",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "JSONPath Query",
+              "input_json": "$activity.definition_activity_01HDRVNKWHFZW2H5X4FYUJIKPL7rgIOoWZW.output.response_body$",
+              "jsonpath_queries": [
+                {
+                  "jsonpath_query": "$[\"responseObject\"][0]['orgName']",
+                  "jsonpath_query_name": "OrgName",
+                  "jsonpath_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HDSJ3BVQGHJ63NKsxW4KQsuVsSZDf5VJ0",
+            "name": "JSONPath Query",
+            "title": "JSONPath Query",
+            "type": "corejava.jsonpathquery",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "JSONPath Query",
+              "input_json": "$activity.definition_activity_01HDSGHZ26FOU0JG6vUUVbClJFU8zXJhcWW.output.response_body$",
+              "jsonpath_queries": [
+                {
+                  "jsonpath_query": "$['responseObject']['devices'][0]['vbond']",
+                  "jsonpath_query_name": "vBondAddress",
+                  "jsonpath_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HDSPA7M97VG1NdkPtyDBnn1MrC0Ybj9d4",
+            "name": "Set Variables",
+            "title": "Set Variables",
+            "type": "core.set_multiple_variables",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Set Variables",
+              "skip_execution": false,
+              "variables_to_update": [
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01HDRKM0T0FDZ35IoulChMIwZF8z3XHcAoE.output.variable_workflow_01HDSP43RDB0M0Hqz0n8mxsrmb6KaU4qojL$",
+                  "variable_value_new": "$activity.definition_activity_01HDSIKTAF66X3iTEqvZsNUi0NXGE3JNFRZ.output.jsonpath_queries.OrgName$"
+                },
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01HDRKM0T0FDZ35IoulChMIwZF8z3XHcAoE.output.variable_workflow_01HDSP8PD202A1l3k9xMSWdamLM16QrsbbL$",
+                  "variable_value_new": "$activity.definition_activity_01HDSJ3BVQGHJ63NKsxW4KQsuVsSZDf5VJ0.output.jsonpath_queries.vBondAddress$"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          }
+        ],
+        "categories": [
+          "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+        ]
+      }
+    },
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01H4F341U3X6B2rCzFev49V2cjNyUCd4YaT",
+        "name": "Atomic_get_device_details 3.0",
+        "title": "Atomic_get_device_details 3.0",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "FlashFree",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HCWGP5STDPP7e3QJYzehH8CRkqJxe4Y0V",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "CertificateSN",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HDNWR72BGBK1RujOMZ9eaiPPBihTnYE4E",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "Errors",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H66QDM4U0J97kIABgXFMpzuHSOBLRt4pE",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "InputDeviceUUID",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HCW0OFAGDLS5W6gWS0wKADYpRYIbc4wTZ",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "Platform",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HCWG28YJHJU5FA4p32FQ1fkjc7NKHhJJg",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "SerialNumber",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HCWG7XGXUUY6q3XREIHXH4FgmEmvxqIPT",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "CodeVersion",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HCWGDGG0WSS7TsRWU6Owe0YM54nBgT4W0",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "FlashTotal",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HCWGKG52VIN1Obh5My7sbxLwGZDCt6UUj",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "display_name": "Atomic_get_device_details 3.0",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "specify_on_workflow_start": false,
+            "target_default": true
+          },
+          "target": {
+            "target_type": "json-rpc.endpoint",
+            "target_id": "definition_target_01HCV8NVL5KMD0PgNgoyy1nLEcAda60Q0El",
+            "execute_on_workflow_target": true
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01HCVWLZLR4G66alX543u7NcsrgxDsObzbm",
+            "name": "HTTP Request",
+            "title": "Get Platform Data",
+            "type": "web-service.http_request",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "allow_auto_redirect": true,
+              "content_type": "application/xml",
+              "continue_on_error_status_code": false,
+              "continue_on_failure": false,
+              "display_name": "Get Platform Data",
+              "method": "GET",
+              "relative_url": "/api/operational/devices/device/$workflow.definition_workflow_01H4F341U3X6B2rCzFev49V2cjNyUCd4YaT.input.variable_workflow_01HCW0OFAGDLS5W6gWS0wKADYpRYIbc4wTZ$/platform",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01HCVWI19IOQP2sTWLBPzESCmswx3VnfOfb"
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HCVY2PMVAUX0gE4ZmflxKrvuxvI1q1hoR",
+            "name": "Convert Xml to Json",
+            "title": "Convert Xml to Json",
+            "type": "core.xml2json",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Convert Xml to Json",
+              "input_xml": "$activity.definition_activity_01HCVWLZLR4G66alX543u7NcsrgxDsObzbm.output.response_body$",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HCW4QQL9G3W5Yu04dhNuIceUYaeysPnLm",
+            "name": "JSONPath Query",
+            "title": "JSONPath Query",
+            "type": "corejava.jsonpathquery",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "JSONPath Query",
+              "input_json": "$activity.definition_activity_01HCVY2PMVAUX0gE4ZmflxKrvuxvI1q1hoR.output.output_json$",
+              "jsonpath_queries": [
+                {
+                  "jsonpath_query": "$[\"platform\"][\"model\"]",
+                  "jsonpath_query_name": "Chassis",
+                  "jsonpath_query_type": "string"
+                },
+                {
+                  "jsonpath_query": "$[\"platform\"][\"serial-number\"]",
+                  "jsonpath_query_name": "SerialNumber",
+                  "jsonpath_query_type": "string"
+                },
+                {
+                  "jsonpath_query": "$[\"platform\"][\"version\"]",
+                  "jsonpath_query_name": "CodeVersion",
+                  "jsonpath_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HCW1UEQN2AN1qq7tQqY0iPoBvUmcdBJnh",
+            "name": "Atomic-run-enable-level-command",
+            "title": "Atomic-run-enable-level-command",
+            "type": "workflow.sub_workflow",
+            "base_type": "subworkflow",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Atomic-run-enable-level-command",
+              "input": {
+                "variable_workflow_01H8L2YJB4E711QHZ6wIQA7Jg9B5UKYc3cR": "dir flash: | inc free",
+                "variable_workflow_01H8L2YJB4OD62JVowzEdQtVSs5jflOxzAS": "$workflow.definition_workflow_01H4F341U3X6B2rCzFev49V2cjNyUCd4YaT.input.variable_workflow_01HCW0OFAGDLS5W6gWS0wKADYpRYIbc4wTZ$"
+              },
+              "runtime_user": {
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "execute_on_this_target": true,
+                "target_id": "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7",
+                "target_type": "msx-api.endpoint"
+              },
+              "workflow_id": "definition_workflow_01H8L2YJI7XH133b1VmyrppdHVoJykN9CKy"
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HCW9H7YY2YM2QDAACPxdKISFT0rbhTjSO",
+            "name": "Execute Python Script",
+            "title": "Execute Python Script",
+            "type": "python3.script",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Execute Python Script",
+              "script": "aaa=\"\"\"$activity.definition_activity_01HCW1UEQN2AN1qq7tQqY0iPoBvUmcdBJnh.output.variable_workflow_01H8L2YJB446Z41uRHNQ3Sp8XY3ocMyFlYj$\"\"\"\n\nflashtotal=aaa.split(\" bytes total (\")[0][1:]\nflashfree=aaa.split(\" bytes total (\")[1].split(\" \")[0]",
+              "script_queries": [
+                {
+                  "script_query": "flashtotal",
+                  "script_query_name": "FlashTotal",
+                  "script_query_type": "string"
+                },
+                {
+                  "script_query": "flashfree",
+                  "script_query_name": "FlashFree",
+                  "script_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HDNPWGCNP3M7RvlUzOKM5qt2irEVUCKVx",
+            "name": "Atomic-run-enable-level-command 3.0",
+            "title": "Atomic-run-enable-level-command 3.0",
+            "type": "workflow.sub_workflow",
+            "base_type": "subworkflow",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Atomic-run-enable-level-command 3.0",
+              "input": {
+                "variable_workflow_01H8L2YJB4E711QHZ6wIQA7Jg9B5UKYc3cR": "show crypto pki certificates",
+                "variable_workflow_01H8L2YJB4OD62JVowzEdQtVSs5jflOxzAS": "$workflow.definition_workflow_01H4F341U3X6B2rCzFev49V2cjNyUCd4YaT.input.variable_workflow_01HCW0OFAGDLS5W6gWS0wKADYpRYIbc4wTZ$"
+              },
+              "runtime_user": {
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "execute_on_this_target": true,
+                "target_id": "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7",
+                "target_type": "msx-api.endpoint"
+              },
+              "workflow_id": "definition_workflow_01H8L2YJI7XH133b1VmyrppdHVoJykN9CKy"
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HDNQGBI2XZQ3K9BwV4jCCw3rQitLPbQ89",
+            "name": "Execute Python Script",
+            "title": "Execute Python Script",
+            "type": "python3.script",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Execute Python Script",
+              "script": "certsn=\"\"\naaa=\"\"\"$activity.definition_activity_01HDNPWGCNP3M7RvlUzOKM5qt2irEVUCKVx.output.variable_workflow_01H8L2YJB446Z41uRHNQ3Sp8XY3ocMyFlYj$\"\"\"\n\nfor item in aaa.split(\"Certificate\\n\"):\n    if \"$activity.definition_activity_01HCW4QQL9G3W5Yu04dhNuIceUYaeysPnLm.output.jsonpath_queries.Chassis$\" in item:\n        certsn=item.split(\"Certificate Serial Number (hex): \")[1].split(\"\\n\")[0]",
+              "script_queries": [
+                {
+                  "script_query": "certsn",
+                  "script_query_name": "CertificateSN",
+                  "script_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HCWGR6XPZ9B3D8MTepyPA2AhQGHsaV6vL",
+            "name": "Set Variables",
+            "title": "Set Variables",
+            "type": "core.set_multiple_variables",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Set Variables",
+              "skip_execution": false,
+              "variables_to_update": [
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01H4F341U3X6B2rCzFev49V2cjNyUCd4YaT.output.variable_workflow_01HCWGDGG0WSS7TsRWU6Owe0YM54nBgT4W0$",
+                  "variable_value_new": "$activity.definition_activity_01HCW4QQL9G3W5Yu04dhNuIceUYaeysPnLm.output.jsonpath_queries.CodeVersion$"
+                },
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01H4F341U3X6B2rCzFev49V2cjNyUCd4YaT.output.variable_workflow_01HCWGP5STDPP7e3QJYzehH8CRkqJxe4Y0V$",
+                  "variable_value_new": "$activity.definition_activity_01HCW9H7YY2YM2QDAACPxdKISFT0rbhTjSO.output.script_queries.FlashFree$"
+                },
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01H4F341U3X6B2rCzFev49V2cjNyUCd4YaT.output.variable_workflow_01HCWGKG52VIN1Obh5My7sbxLwGZDCt6UUj$",
+                  "variable_value_new": "$activity.definition_activity_01HCW9H7YY2YM2QDAACPxdKISFT0rbhTjSO.output.script_queries.FlashTotal$"
+                },
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01H4F341U3X6B2rCzFev49V2cjNyUCd4YaT.output.variable_workflow_01HCWG28YJHJU5FA4p32FQ1fkjc7NKHhJJg$",
+                  "variable_value_new": "$activity.definition_activity_01HCW4QQL9G3W5Yu04dhNuIceUYaeysPnLm.output.jsonpath_queries.Chassis$"
+                },
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01H4F341U3X6B2rCzFev49V2cjNyUCd4YaT.output.variable_workflow_01HCWG7XGXUUY6q3XREIHXH4FgmEmvxqIPT$",
+                  "variable_value_new": "$activity.definition_activity_01HCW4QQL9G3W5Yu04dhNuIceUYaeysPnLm.output.jsonpath_queries.SerialNumber$"
+                },
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01H4F341U3X6B2rCzFev49V2cjNyUCd4YaT.output.variable_workflow_01HDNWR72BGBK1RujOMZ9eaiPPBihTnYE4E$",
+                  "variable_value_new": "$activity.definition_activity_01HDNQGBI2XZQ3K9BwV4jCCw3rQitLPbQ89.output.script_queries.CertificateSN$"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          }
+        ],
+        "categories": [
+          "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+        ]
+      }
+    },
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01H9LF5FV6A271DGCLVzAAeDGuDrgW7XOkv",
+        "name": "Atomic-get-tenent-id 3.0",
+        "title": "Atomic-get-tenent-id 3.0",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "1101_tes1a",
+              "scope": "static",
+              "name": "Input Device Name",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5F6W2IJ2d6YyEPMtqNUoyCTZoHg4l",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "Bootflash Report",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5F6W93C00EuDaiDvVRprVtlfXQwYL",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.secure_string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "TokenOut",
+              "type": "datatype.secure_string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5F6WCTU6qRXcY0qMN3vGVkTmkXp59",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "Tenant Display Name",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5F6WWI92sL5QPZLNqhj86QKyyFESh",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "Coke",
+              "scope": "static",
+              "name": "Input Tenant Name",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5F6WGCS5q5EAryd8o5MX9ph4P0uuy",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "RomMom Report",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5F6WTBQ3eQM4GssTj9RoDltR5MtnA",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "Report",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5F6WMVO3yUlLEsff0UPItDXfLthMe",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "Errors",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5F6WJMX6ANllItGhf6XPHi66NAOlG",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "TenentIdOut",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5F6WQ522S24TCdcU9zMH9MFNYT3JS",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "display_name": "Atomic-get-tenent-id 3.0",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "specify_on_workflow_start": false,
+            "target_default": true
+          },
+          "target": {
+            "target_type": "msx-api.endpoint",
+            "target_id": "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7",
+            "execute_on_workflow_target": true
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01H9LF6QWQYG9776Ytqie9lWoC1Qv92F46j",
+            "name": "Session Login",
+            "title": "Login to MSX",
+            "type": "msxapi.login",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Login to MSX",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "specificPassword": "superuser",
+              "specificUsername": "superuser",
+              "target": {
+                "override_workflow_target": false,
+                "override_workflow_target_group_criteria": false,
+                "use_workflow_target": true,
+                "use_workflow_target_group": false
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01H9LF73Y9JV34YJuwYPIrSZdXouvc0EIJu",
+            "name": "JSONPath Query",
+            "title": "Set Token",
+            "type": "corejava.jsonpathquery",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Set Token",
+              "input_json": "$activity.definition_activity_01H9LF6QWQYG9776Ytqie9lWoC1Qv92F46j.output.body$",
+              "jsonpath_queries": [
+                {
+                  "jsonpath_query": "$.[\"access_token\"]",
+                  "jsonpath_query_name": "MSX Token",
+                  "jsonpath_query_type": "secure_string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01H9LF7OXM17M2Wne6D5Gzl6tZqetDj4pT7",
+            "name": "List My Tenants",
+            "title": "List My Tenants",
+            "type": "msxapi.get-my-tenants",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "List My Tenants",
+              "msxtoken": "$activity.definition_activity_01H9LF6QWQYG9776Ytqie9lWoC1Qv92F46j.output.accessToken$",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": false,
+                "override_workflow_target_group_criteria": false,
+                "use_workflow_target": true,
+                "use_workflow_target_group": false
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01H9LF857V3AY56aXNXqZPvdn0SdniPF3MI",
+            "name": "JSONPath Query",
+            "title": "JSONPath Query",
+            "type": "corejava.jsonpathquery",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "JSONPath Query",
+              "input_json": "$activity.definition_activity_01H9LF7OXM17M2Wne6D5Gzl6tZqetDj4pT7.output.body$",
+              "jsonpath_queries": [
+                {
+                  "jsonpath_query": "$.[\"tenants\"]",
+                  "jsonpath_query_name": "tenantID",
+                  "jsonpath_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01H9LF8L7CJM1727pdIKBo6m7R6rKqO2r0O",
+            "name": "Execute Python Script",
+            "title": "Python Script to get tenantName",
+            "type": "python3.script",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Python Script to get tenantName",
+              "script": "y=\"\"\ntry:\n    for item in $activity.definition_activity_01H9LF857V3AY56aXNXqZPvdn0SdniPF3MI.output.jsonpath_queries.tenantID$:\n        if item[\"displayName\"]==\"$workflow.definition_workflow_01H9LF5FV6A271DGCLVzAAeDGuDrgW7XOkv.input.variable_workflow_01H9LF5F6WWI92sL5QPZLNqhj86QKyyFESh$\":\n            y=item[\"tenantName\"]\nexcept:\n    errormessage = \"Tenant not found\"\n",
+              "script_queries": [
+                {
+                  "script_query": "y",
+                  "script_query_name": "tenaneName",
+                  "script_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01H9LF91A104F7kK6RlIqA6tWFgYjAFQMjB",
+            "name": "Condition Block",
+            "title": "Condition Block",
+            "type": "logic.if_else",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Condition Block",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "blocks": [
+              {
+                "unique_name": "definition_activity_01H9LF9CXOAFR18CcPrvmBojLY4hvTQh91i",
+                "name": "Condition Branch",
+                "title": "Condition Branch",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_01H9LF8L7CJM1727pdIKBo6m7R6rKqO2r0O.output.script_queries.tenaneName$",
+                    "operator": "eq",
+                    "right_operand": ""
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Condition Branch",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01H9LF9P20SIA7LcPRDuxK65U0TiRX5Rgx7",
+                    "name": "Set Variables",
+                    "title": "Set Variables",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Set Variables",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01H9LF5FV6A271DGCLVzAAeDGuDrgW7XOkv.output.variable_workflow_01H9LF5F6WJMX6ANllItGhf6XPHi66NAOlG$",
+                          "variable_value_new": "Tenant not found"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01H9LF9ZZEAOV2T82pJxTtOYHm62i4tbNqz",
+                    "name": "Completed",
+                    "title": "Completed",
+                    "type": "logic.completed",
+                    "base_type": "activity",
+                    "properties": {
+                      "completion_type": "succeeded",
+                      "display_name": "Completed"
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01H9LFAAC5XN53YFeERNEqXysyKrcnZ6ghJ",
+                "name": "Condition Branch",
+                "title": "Condition Branch",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_01H9LF8L7CJM1727pdIKBo6m7R6rKqO2r0O.output.script_queries.tenaneName$",
+                    "operator": "ne",
+                    "right_operand": ""
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Condition Branch",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01H9LFAMKDKUW21kuFhpCHAua7Mz1Um3uZw",
+                    "name": "Set Variables",
+                    "title": "Set Variables",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Set Variables",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01H9LF5FV6A271DGCLVzAAeDGuDrgW7XOkv.output.variable_workflow_01H9LF5F6WJMX6ANllItGhf6XPHi66NAOlG$",
+                          "variable_value_new": "None"
+                        },
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01H9LF5FV6A271DGCLVzAAeDGuDrgW7XOkv.output.variable_workflow_01H9LF5F6WCTU6qRXcY0qMN3vGVkTmkXp59$",
+                          "variable_value_new": "$activity.definition_activity_01H9LF73Y9JV34YJuwYPIrSZdXouvc0EIJu.output.jsonpath_queries.MSX Token$"
+                        },
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01H9LF5FV6A271DGCLVzAAeDGuDrgW7XOkv.output.variable_workflow_01H9LF5F6WQ522S24TCdcU9zMH9MFNYT3JS$",
+                          "variable_value_new": "$activity.definition_activity_01H9LF8L7CJM1727pdIKBo6m7R6rKqO2r0O.output.script_queries.tenaneName$"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "categories": [
+          "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+        ]
+      }
+    },
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01H9LF5GTRU3V3WS5Qy0lPHywTVly89NPFm",
+        "name": "Atomic-run-enable-level-command",
+        "title": "Atomic-run-enable-level-command",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "DeviceUUID",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5FUZE0D1MPjGyCdyGEc8n8WnMVoft",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "1101_tes1a",
+              "scope": "static",
+              "name": "Input Device Name",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5FUZ48L67tbxifIRi07neJaYvGiXm",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "Errors",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5FUYUEK1TU9rrFeDSiR1G0flHb8lD",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "CommandOutput",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5FUYQN57M6BRb5zBbUldHBJhiM2T4",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "RomMom Report",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5FUYXSS2uGcuuSdCB2qL0L4wnk0bF",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "Report",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5FUZ7HD4AhLCShlIdA55lCtu0qCtS",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "EnableLevelCommand",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5FUYJZM3W4LjxTPcQZj0VrUjNfuKq",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "Coke",
+              "scope": "static",
+              "name": "Input Tenant Name",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5FUZAPL01JFhO8C82YJH2xTLPIm2u",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "Bootflash Report",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5FUZ1072v9HGHcEYktk4j0gusissf",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "display_name": "Atomic-run-enable-level-command",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "specify_on_workflow_start": false,
+            "target_default": true
+          },
+          "target": {
+            "target_type": "msx-api.endpoint",
+            "target_id": "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7",
+            "execute_on_workflow_target": true
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01H9LF6UW4G3X10LwArdI1F7MLpjwbFGdyF",
+            "name": "Session Login",
+            "title": "Session Login",
+            "type": "jsonrpc.login",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Session Login",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01HCV8NVL5KMD0PgNgoyy1nLEcAda60Q0El"
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01H9LF7968QAO60TXEu0ZxhFO21sJxtbf5X",
+            "name": "Start a new Transaction",
+            "title": "Start a new Transaction",
+            "type": "jsonrpc.newtrans",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "database": "running",
+              "display_name": "Start a new Transaction",
+              "mode": "read_write",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "sessionid": "$activity.definition_activity_01H9LF6UW4G3X10LwArdI1F7MLpjwbFGdyF.output.sessionid$",
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01HCV8NVL5KMD0PgNgoyy1nLEcAda60Q0El"
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01H9LF816BUKQ1EFiJNdZhKDFRBQqsLaxfr",
+            "name": "Run Action",
+            "title": "Run Command",
+            "type": "jsonrpc.runaction",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Run Command",
+              "params": "{\"args\":\"\\\"$workflow.definition_workflow_01H9LF5GTRU3V3WS5Qy0lPHywTVly89NPFm.input.variable_workflow_01H9LF5FUYJZM3W4LjxTPcQZj0VrUjNfuKq$\\\"\\\"|noprompts\\\"\"}",
+              "path": "/ncs:devices/device{$workflow.definition_workflow_01H9LF5GTRU3V3WS5Qy0lPHywTVly89NPFm.input.variable_workflow_01H9LF5FUZE0D1MPjGyCdyGEc8n8WnMVoft$}/live-status/ios-stats:exec/any/",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "sessionid": "$activity.definition_activity_01H9LF6UW4G3X10LwArdI1F7MLpjwbFGdyF.output.sessionid$",
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01HCV8NVL5KMD0PgNgoyy1nLEcAda60Q0El"
+              },
+              "th": "$activity.definition_activity_01H9LF7968QAO60TXEu0ZxhFO21sJxtbf5X.output.th$"
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01H9LF8K8RBCT34NicXa908iKg5XdcaxzvS",
+            "name": "JSONPath Query",
+            "title": "JSONPath Query",
+            "type": "corejava.jsonpathquery",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "JSONPath Query",
+              "input_json": "$activity.definition_activity_01H9LF816BUKQ1EFiJNdZhKDFRBQqsLaxfr.output.output$",
+              "jsonpath_queries": [
+                {
+                  "jsonpath_query": "$.[\"result\"][0][\"value\"]",
+                  "jsonpath_query_name": "RomMonCommandOutput",
+                  "jsonpath_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01H9LF91XQJAX6arPqaN65HDLSOIF7ct7Yv",
+            "name": "Set Variables",
+            "title": "Set Variables",
+            "type": "core.set_multiple_variables",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Set Variables",
+              "skip_execution": false,
+              "variables_to_update": [
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01H9LF5GTRU3V3WS5Qy0lPHywTVly89NPFm.output.variable_workflow_01H9LF5FUYQN57M6BRb5zBbUldHBJhiM2T4$",
+                  "variable_value_new": "$activity.definition_activity_01H9LF8K8RBCT34NicXa908iKg5XdcaxzvS.output.jsonpath_queries.RomMonCommandOutput$"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          }
+        ],
+        "categories": [
+          "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+        ]
+      }
+    },
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01H9LF5II6AFD0WCSlPiT2WqUxm0ZXjiNLD",
+        "name": "Atomic-get-device-uuid 3.0",
+        "title": "Atomic-get-device-uuid 3.0",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "Coke",
+              "scope": "static",
+              "name": "Input Tenant Name",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5I0LBUP471VODvfd0XfsVWFlR8q7b",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "DeviceUUID",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5I0KH5P5agTp6HGGA7FnEgfTF162V",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "Bootflash Report",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5I0KR3R6HDq80vMUEVM3M2TCnJLhd",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "TenentId",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5I0LI8S3TgsL6yQ1SUEemTcXclRxm",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "Device Display Name",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5I0KXSJ7j0EQd9NghL1iPHFpzEzmq",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "Errors",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5I0L49V4sUhgdheY5HdqVUEW0g9gO",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "1101_tes1a",
+              "scope": "static",
+              "name": "Input Device Name",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5I0KNJ05e3rWOPw66SKj7FR7WFxeV",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "PreviousErrors",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5I0L8FL0iMvPXoh4BXx1XO4fTUVXV",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.secure_string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "SecureString",
+              "type": "datatype.secure_string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5I0L0ZY43IjPSSkKvmP9u2k7DjY2L",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "Report",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5I0KUI07LxY0Gwb9I1ocAnwevGpUP",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "RomMom Report",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H9LF5I0LEZS2UQJdwJhP3v5JADfBeJ1Ue",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "display_name": "Atomic-get-device-uuid 3.0",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "specify_on_workflow_start": false,
+            "target_default": true
+          },
+          "target": {
+            "target_type": "msx-api.endpoint",
+            "target_id": "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7",
+            "execute_on_workflow_target": true
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01H9LF70ECOS12AuZTZFTsISGErI3iJgjP6",
+            "name": "Condition Block",
+            "title": "Verify Tenant was found",
+            "type": "logic.if_else",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Verify Tenant was found",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "blocks": [
+              {
+                "unique_name": "definition_activity_01H9LF77P7PPM5Szt1yyVAUj8KhJ4jqHptC",
+                "name": "Condition Branch",
+                "title": "Not Found",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$workflow.definition_workflow_01H9LF5II6AFD0WCSlPiT2WqUxm0ZXjiNLD.input.variable_workflow_01H9LF5I0L8FL0iMvPXoh4BXx1XO4fTUVXV$",
+                    "operator": "eq",
+                    "right_operand": "Tenant not found"
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Not Found",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01H9LF7QZ9XIP35sTMK4kYOjrmYrFD0M2Ok",
+                    "name": "Set Variables",
+                    "title": "Set Variables",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Set Variables",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01H9LF5II6AFD0WCSlPiT2WqUxm0ZXjiNLD.output.variable_workflow_01H9LF5I0L49V4sUhgdheY5HdqVUEW0g9gO$",
+                          "variable_value_new": "$workflow.definition_workflow_01H9LF5II6AFD0WCSlPiT2WqUxm0ZXjiNLD.input.variable_workflow_01H9LF5I0L8FL0iMvPXoh4BXx1XO4fTUVXV$"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01H9LF80HW09X3hAQd0cOSXJ6nuPR3fZLxY",
+                    "name": "Completed",
+                    "title": "Completed",
+                    "type": "logic.completed",
+                    "base_type": "activity",
+                    "properties": {
+                      "completion_type": "succeeded",
+                      "display_name": "Completed"
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01H9LF8A2D0OX2TtfEcPSdl4tUQp0QNcPdd",
+                "name": "Condition Branch",
+                "title": "Found",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$workflow.definition_workflow_01H9LF5II6AFD0WCSlPiT2WqUxm0ZXjiNLD.input.variable_workflow_01H9LF5I0L8FL0iMvPXoh4BXx1XO4fTUVXV$",
+                    "operator": "ne",
+                    "right_operand": "Tenant not found"
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Found",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01H9LF8S4TPOJ2PYyKxu042xwQDA0FFYmaw",
+            "name": "HTTP Request",
+            "title": "HTTP Request",
+            "type": "web-service.http_request",
+            "base_type": "activity",
+            "properties": {
+              "accept": "application/json",
+              "action_timeout": 180,
+              "allow_auto_redirect": true,
+              "content_type": "application/json",
+              "continue_on_error_status_code": false,
+              "continue_on_failure": false,
+              "custom_headers": [
+                {
+                  "name": "Authorization",
+                  "value": "Bearer $workflow.definition_workflow_01H9LF5II6AFD0WCSlPiT2WqUxm0ZXjiNLD.input.variable_workflow_01H9LF5I0L0ZY43IjPSSkKvmP9u2k7DjY2L$"
+                }
+              ],
+              "display_name": "HTTP Request",
+              "method": "GET",
+              "relative_url": "/manageddevice/api/v3/sites?status=true\u0026tenantId=$workflow.definition_workflow_01H9LF5II6AFD0WCSlPiT2WqUxm0ZXjiNLD.input.variable_workflow_01H9LF5I0LI8S3TgsL6yQ1SUEemTcXclRxm$",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01H4JNO7SIPFW3MQaJks7S9lyooOqYfDeE7"
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01H9LF9DMKVU601yiT3uQcWvIKxY8zJwoy8",
+            "name": "JSONPath Query",
+            "title": "JSONPath Query",
+            "type": "corejava.jsonpathquery",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "JSONPath Query",
+              "input_json": "$activity.definition_activity_01H9LF8S4TPOJ2PYyKxu042xwQDA0FFYmaw.output.response_body$",
+              "jsonpath_queries": [
+                {
+                  "jsonpath_query": "$.[\"responseObject\"]",
+                  "jsonpath_query_name": "DeviceNSOName",
+                  "jsonpath_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01H9LF9SMRAK418HidbWuLUpjVmL1ztPMxo",
+            "name": "Execute Python Script",
+            "title": "Execute Python Script",
+            "type": "python3.script",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Execute Python Script",
+              "script": "true=\"True\"\ny=\"\"\ntry:\n    for item in $activity.definition_activity_01H9LF9DMKVU601yiT3uQcWvIKxY8zJwoy8.output.jsonpath_queries.DeviceNSOName$:\n        if item[\"siteName\"]==\"$workflow.definition_workflow_01H9LF5II6AFD0WCSlPiT2WqUxm0ZXjiNLD.input.variable_workflow_01H9LF5I0KXSJ7j0EQd9NghL1iPHFpzEzmq$\":\n            y=item[\"deviceInstanceId\"]\nexcept:\n    errormessage = \"Device Not Found\"",
+              "script_queries": [
+                {
+                  "script_query": "y",
+                  "script_query_name": "NSODeviceName",
+                  "script_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01H9LFA57SJQU0F3hl0WmR12VAusX5kVc2M",
+            "name": "Condition Block",
+            "title": "Verify entered device was found",
+            "type": "logic.if_else",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Verify entered device was found",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "blocks": [
+              {
+                "unique_name": "definition_activity_01H9LFAEJ4PNH5ZlfUDXR5wUGHGXTbnIcbW",
+                "name": "Condition Branch",
+                "title": "Condition Branch",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_01H9LF9SMRAK418HidbWuLUpjVmL1ztPMxo.output.script_queries.NSODeviceName$",
+                    "operator": "eq",
+                    "right_operand": ""
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Condition Branch",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01H9LFARFUIJO7XuHBkKVh4x3YgOrjMq5x3",
+                    "name": "Set Variables",
+                    "title": "Set Variables",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Set Variables",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01H9LF5II6AFD0WCSlPiT2WqUxm0ZXjiNLD.output.variable_workflow_01H9LF5I0L49V4sUhgdheY5HdqVUEW0g9gO$",
+                          "variable_value_new": "Device Not Found"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01H9LFB27A70O460Vw109yXvJ0MyEoDWF6u",
+                    "name": "Completed",
+                    "title": "Completed",
+                    "type": "logic.completed",
+                    "base_type": "activity",
+                    "properties": {
+                      "completion_type": "succeeded",
+                      "display_name": "Completed"
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01H9LFBC2ILGV2JQWV9cCHjHYIWUskXnlDS",
+                "name": "Condition Branch",
+                "title": "Condition Branch",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_01H9LF9SMRAK418HidbWuLUpjVmL1ztPMxo.output.script_queries.NSODeviceName$",
+                    "operator": "ne",
+                    "right_operand": ""
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Condition Branch",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01H9LFBLLFQ0Q60jRGyH41VTka78tuOhAa5",
+                    "name": "Set Variables",
+                    "title": "Set Variables",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Set Variables",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01H9LF5II6AFD0WCSlPiT2WqUxm0ZXjiNLD.output.variable_workflow_01H9LF5I0L49V4sUhgdheY5HdqVUEW0g9gO$",
+                          "variable_value_new": "None"
+                        },
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01H9LF5II6AFD0WCSlPiT2WqUxm0ZXjiNLD.output.variable_workflow_01H9LF5I0KH5P5agTp6HGGA7FnEgfTF162V$",
+                          "variable_value_new": "$activity.definition_activity_01H9LF9SMRAK418HidbWuLUpjVmL1ztPMxo.output.script_queries.NSODeviceName$"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "categories": [
+          "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+        ]
+      }
+    },
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01H8L2YJI7XH133b1VmyrppdHVoJykN9CKy",
+        "name": "Atomic-run-enable-level-command 3.0",
+        "title": "Atomic-run-enable-level-command 3.0",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "Bootflash Report",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H8L2YJB49VD4gcdl5uqkUv0FXHTkGVCzN",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "DeviceUUID",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H8L2YJB4OD62JVowzEdQtVSs5jflOxzAS",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "CommandOutput",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H8L2YJB446Z41uRHNQ3Sp8XY3ocMyFlYj",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "Coke",
+              "scope": "static",
+              "name": "Input Tenant Name",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H8L2YJB4ME07bBJ1vFCjT2Nw2jqtGxbuY",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "1101_tes1a",
+              "scope": "static",
+              "name": "Input Device Name",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H8L2YJB4C1M7HnzNbrJkOvFjkkRIMCwiz",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "Report",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H8L2YJB4KE27cfmYsojG4iASM0fnSJRSL",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "RomMom Report",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H8L2YJB4GAT0eWbDRBJIXQQ9PDDkwSbjI",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "EnableLevelCommand",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H8L2YJB4E711QHZ6wIQA7Jg9B5UKYc3cR",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "Errors",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01H8L2YJB4IGH1A2rQ7PaKVblHfqOIjFHBW",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "display_name": "Atomic-run-enable-level-command 3.0",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "specify_on_workflow_start": false,
+            "target_default": true
+          },
+          "target": {
+            "target_type": "msx-api.endpoint",
+            "target_id": "definition_target_01AP3HJWRWFX42IV83Wb0RzVJV6vseowkU7",
+            "execute_on_workflow_target": true
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01H8L2ZB9ZUT364UdrYEzeI6U6vv59ZKsgS",
+            "name": "Session Login",
+            "title": "Session Login",
+            "type": "jsonrpc.login",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Session Login",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01HCV8NVL5KMD0PgNgoyy1nLEcAda60Q0El"
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01H8L2ZHBRGLF3nWv48jMsvhyXhpyN99kSP",
+            "name": "Start a new Transaction",
+            "title": "Start a new Transaction",
+            "type": "jsonrpc.newtrans",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "database": "running",
+              "display_name": "Start a new Transaction",
+              "mode": "read_write",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "sessionid": "$activity.definition_activity_01H8L2ZB9ZUT364UdrYEzeI6U6vv59ZKsgS.output.sessionid$",
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01HCV8NVL5KMD0PgNgoyy1nLEcAda60Q0El"
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01H8L2ZOQI6K83utM3m18oUB27tzAlffm8u",
+            "name": "Run Action",
+            "title": "Run Command",
+            "type": "jsonrpc.runaction",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Run Command",
+              "params": "{\"args\":\"\\\"$workflow.definition_workflow_01H8L2YJI7XH133b1VmyrppdHVoJykN9CKy.input.variable_workflow_01H8L2YJB4E711QHZ6wIQA7Jg9B5UKYc3cR$\\\"\\\"|noprompts\\\"\"}",
+              "path": "/ncs:devices/device{$workflow.definition_workflow_01H8L2YJI7XH133b1VmyrppdHVoJykN9CKy.input.variable_workflow_01H8L2YJB4OD62JVowzEdQtVSs5jflOxzAS$}/live-status/ios-stats:exec/any/",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "sessionid": "$activity.definition_activity_01H8L2ZB9ZUT364UdrYEzeI6U6vv59ZKsgS.output.sessionid$",
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01HCV8NVL5KMD0PgNgoyy1nLEcAda60Q0El"
+              },
+              "th": "$activity.definition_activity_01H8L2ZHBRGLF3nWv48jMsvhyXhpyN99kSP.output.th$"
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01H8L2ZWJVYU87HsV8zotHa9CtBbqjVjlbq",
+            "name": "JSONPath Query",
+            "title": "JSONPath Query",
+            "type": "corejava.jsonpathquery",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "JSONPath Query",
+              "input_json": "$activity.definition_activity_01H8L2ZOQI6K83utM3m18oUB27tzAlffm8u.output.output$",
+              "jsonpath_queries": [
+                {
+                  "jsonpath_query": "$.[\"result\"][0][\"value\"]",
+                  "jsonpath_query_name": "RomMonCommandOutput",
+                  "jsonpath_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01H8L300X515Q5B1Byq0G2ni2lLuLwqMGV7",
+            "name": "Set Variables",
+            "title": "Set Variables",
+            "type": "core.set_multiple_variables",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Set Variables",
+              "skip_execution": false,
+              "variables_to_update": [
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01H8L2YJI7XH133b1VmyrppdHVoJykN9CKy.output.variable_workflow_01H8L2YJB446Z41uRHNQ3Sp8XY3ocMyFlYj$",
+                  "variable_value_new": "$activity.definition_activity_01H8L2ZWJVYU87HsV8zotHa9CtBbqjVjlbq.output.jsonpath_queries.RomMonCommandOutput$"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          }
+        ],
+        "categories": [
+          "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+        ]
+      }
+    },
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01HCY149LGEWA4mwzYDyk2Ho0QUu5Kbm5SZ",
+        "name": "Atomic-Verify-Checksum 3.0",
+        "title": "Atomic-Verify-Checksum 3.0",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "ChecksumValidity",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HCYAPKJB5LN5FclfMElnTQxaYUYtjwo1o",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "DeviceUUID",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HCYKL7XKBCG3yqI23T1nHo7Amme35mJo4",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "input",
+              "name": "FIleName",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HCY8JX7FHIR0TgqLk08Hew5ZVUHmd1AXW",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "output",
+              "name": "RawOutput",
+              "type": "datatype.string",
+              "is_required": false
+            },
+            "unique_name": "variable_workflow_01HCYAHF7CJMK4Rr91KSQWeQnslQv2Wo20h",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "display_name": "Atomic-Verify-Checksum 3.0",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "specify_on_workflow_start": false,
+            "target_default": true
+          },
+          "target": {
+            "target_type": "json-rpc.endpoint",
+            "target_id": "definition_target_01HCV8NVL5KMD0PgNgoyy1nLEcAda60Q0El",
+            "execute_on_workflow_target": true
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01HCY1RGW3B6P4jF47NxhqoqcZoijtirajw",
+            "name": "Session Login",
+            "title": "Session Login",
+            "type": "jsonrpc.login",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Session Login",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": false,
+                "override_workflow_target_group_criteria": false,
+                "use_workflow_target": true,
+                "use_workflow_target_group": false
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HCY1T8K9G7N43XSay7NLvQlZk0rPjPfJc",
+            "name": "Start a new Transaction",
+            "title": "Start a new Transaction",
+            "type": "jsonrpc.newtrans",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "database": "running",
+              "display_name": "Start a new Transaction",
+              "mode": "read_write",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "sessionid": "$activity.definition_activity_01HCY1RGW3B6P4jF47NxhqoqcZoijtirajw.output.sessionid$",
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": false,
+                "override_workflow_target_group_criteria": false,
+                "use_workflow_target": true,
+                "use_workflow_target_group": false
+              }
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HCY2ESIU8BO2ahRwTecnBqWKsxrvGROUJ",
+            "name": "Run Action",
+            "title": "Run Action",
+            "type": "jsonrpc.runaction",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Run Action",
+              "params": "{\"args\":\"\\\"flash:$workflow.definition_workflow_01HCY149LGEWA4mwzYDyk2Ho0QUu5Kbm5SZ.input.variable_workflow_01HCY8JX7FHIR0TgqLk08Hew5ZVUHmd1AXW$\\\"\\\"|noprompts\\\"\"}",
+              "path": "/ncs:devices/device{$workflow.definition_workflow_01HCY149LGEWA4mwzYDyk2Ho0QUu5Kbm5SZ.input.variable_workflow_01HCYKL7XKBCG3yqI23T1nHo7Amme35mJo4$}/live-status/exec/verify",
+              "runtime_user": {
+                "override_target_runtime_user": false,
+                "target_default": true
+              },
+              "sessionid": "$activity.definition_activity_01HCY1RGW3B6P4jF47NxhqoqcZoijtirajw.output.sessionid$",
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": false,
+                "override_workflow_target_group_criteria": false,
+                "use_workflow_target": true,
+                "use_workflow_target_group": false
+              },
+              "th": "$activity.definition_activity_01HCY1T8K9G7N43XSay7NLvQlZk0rPjPfJc.output.th$"
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HCYATFNSKG96T3DAixw4Hkqo6B5PaUxpz",
+            "name": "Execute Python Script",
+            "title": "Execute Python Script",
+            "type": "python3.script",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Execute Python Script",
+              "script": "aaa=\"\"\"$activity.definition_activity_01HCY2ESIU8BO2ahRwTecnBqWKsxrvGROUJ.output.output$\"\"\"\nif \"Digital signature successfully verified\" in aaa:\n    validity=\"Valid\"\nelse:\n    validity=\"NOT Valid\"",
+              "script_queries": [
+                {
+                  "script_query": "validity",
+                  "script_query_name": "Validity",
+                  "script_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01HCYBQSZVV0L0JnjwrFBBN8f3E2JuZRlXi",
+            "name": "Set Variables",
+            "title": "Set Variables",
+            "type": "core.set_multiple_variables",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Set Variables",
+              "skip_execution": false,
+              "variables_to_update": [
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01HCY149LGEWA4mwzYDyk2Ho0QUu5Kbm5SZ.output.variable_workflow_01HCYAHF7CJMK4Rr91KSQWeQnslQv2Wo20h$",
+                  "variable_value_new": "$activity.definition_activity_01HCY2ESIU8BO2ahRwTecnBqWKsxrvGROUJ.output.output$"
+                },
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01HCY149LGEWA4mwzYDyk2Ho0QUu5Kbm5SZ.output.variable_workflow_01HCYAPKJB5LN5FclfMElnTQxaYUYtjwo1o$",
+                  "variable_value_new": "$activity.definition_activity_01HCYATFNSKG96T3DAixw4Hkqo6B5PaUxpz.output.script_queries.Validity$"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          }
+        ],
+        "categories": [
+          "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+        ]
+      }
+    }
+  ]
+}
