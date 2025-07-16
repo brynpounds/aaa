@@ -1,0 +1,44 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_02OGQFNUL29D83R6Z8NW2HBggsCNu2JeP5h",
+    "name": "git test",
+    "title": "git test",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": null,
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "git test",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "no_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_02OGQFR0GJUB856ME3LZnZS18YWt4WE9m1X",
+        "name": "Sleep",
+        "title": "Sleep",
+        "type": "core.sleep",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "description": "Sleep",
+          "display_name": "Sleep",
+          "skip_execution": false,
+          "sleep_interval": 2
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  }
+}
