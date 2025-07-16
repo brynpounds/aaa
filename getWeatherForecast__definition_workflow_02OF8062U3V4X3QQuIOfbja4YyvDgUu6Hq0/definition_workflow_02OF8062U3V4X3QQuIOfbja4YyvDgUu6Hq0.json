@@ -1,0 +1,93 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_02OF8062U3V4X3QQuIOfbja4YyvDgUu6Hq0",
+    "name": "Get Weather",
+    "title": "Get Weather",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "zip",
+          "type": "datatype.string",
+          "is_required": false,
+          "display_on_wizard": false,
+          "is_invisible": false,
+          "variable_string_format": "text"
+        },
+        "unique_name": "variable_workflow_02OFY3T2C5UAH2PwhH4MecMYymWY4SkLMPJ",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Get Weather",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "target_id": "definition_target_02OF7MEBSDVTG3EczI6GYuOfmlkiOgc2UI3",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_02OF806515XLD20KjpTipWWHF1i9n5p70ZR",
+        "name": "HTTP Request",
+        "title": "HTTP Request",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "allow_headers_redirect": false,
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "description": "HTTP Request",
+          "display_name": "HTTP Request",
+          "method": "GET",
+          "relative_url": "/data/2.5/forecast?zip=$workflow.definition_workflow_02OF8062U3V4X3QQuIOfbja4YyvDgUu6Hq0.input.variable_workflow_02OFY3T2C5UAH2PwhH4MecMYymWY4SkLMPJ$,us\u0026appid=2e58f7e1d4f9090e8757b52cbc63e3e0\u0026units=imperial",
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "use_workflow_target": true
+          }
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_02OF7MEBSDVTG3EczI6GYuOfmlkiOgc2UI3": {
+      "unique_name": "definition_target_02OF7MEBSDVTG3EczI6GYuOfmlkiOgc2UI3",
+      "name": "OpenWeatherMap",
+      "title": "OpenWeatherMap",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": true,
+        "display_name": "OpenWeatherMap",
+        "host": "api.openweathermap.org",
+        "ignore_proxy": false,
+        "is_https_proxy": false,
+        "no_runtime_user": true,
+        "port": 443,
+        "protocol": "https"
+      }
+    }
+  }
+}
